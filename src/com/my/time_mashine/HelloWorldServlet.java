@@ -1,4 +1,4 @@
-package com.goit.apofig.servlets;
+package com.my.time_mashine;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

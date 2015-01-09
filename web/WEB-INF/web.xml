@@ -6,7 +6,7 @@
 
     <servlet>
         <servlet-name>HelloServlet</servlet-name>
-        <servlet-class>com.goit.apofig.servlets.HelloWorldServlet</servlet-class>
+        <servlet-class>com.my.time_mashine.HelloWorldServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HelloServlet</servlet-name>
