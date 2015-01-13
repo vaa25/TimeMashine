@@ -21,32 +21,6 @@
         var map = null;
         var path = [];
         var yerusalem = new google.maps.LatLng(31.76904, 35.21633);
-        function init() {
-
-            var mapLabel = new MapLabel({
-                text: 'Yerusalem',
-                position: yerusalem,
-                map: map,
-                fontSize: 35,
-                align: 'right'
-            });
-//            mapLabel.set('position', new google.maps.LatLng(34.03, -118.235));
-
-            var marker = new google.maps.Marker;
-            marker.bindTo('map', mapLabel);
-            marker.bindTo('position', mapLabel);
-            marker.setDraggable(false);
-
-//            mapLabel.set('align', document.getElementById('align').value);
-//            mapLabel.set('fontSize', document.getElementById('font').value);
-//            mapLabel.set('fontColor', document.getElementById('font-color').value);
-//            mapLabel.set('text', document.getElementById('text').value);
-//            mapLabel.set('strokeWeight',document.getElementById('stroke-weight').value);
-//            mapLabel.set('strokeColor',document.getElementById('stroke-color').value);
-        }
-
-        //        google.maps.event.addDomListener(window, 'load', init);
-
 
         function initialize() {
             var mapOptions = {
@@ -64,14 +38,13 @@
 
             poly.setMap(map);
 
-            var mapLabel = new MapLabel({
-                text: 'Yerusalem',
-                position: yerusalem,
-                map: map,
-                fontSize: 35,
-                align: 'right'
-            });
-//            mapLabel.set('position', new google.maps.LatLng(34.03, -118.235));
+//            var mapLabel = new MapLabel({   // ошибка где-то здесь
+//                text: 'Yerusalem',
+//                position: yerusalem,
+//                map: map,
+//                fontSize: 35,
+//                align: 'right'
+//            });
 
 //        var marker = new google.maps.Marker;
 //        marker.bindTo('map', mapLabel);
