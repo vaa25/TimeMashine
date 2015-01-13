@@ -11,8 +11,19 @@ import java.io.IOException;
  */
 public class HelloWorldServlet extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String requestUri = new String(req.getRequestURI());
+        if (!requestUri.equals("/")) {
+            if (requestUri.endsWith(".html")) {
+                requestUri = requestUri.replace(".html", ".jsp");
+            } else {
+                return;
+            }
+            getServletContext().getRequestDispatcher(requestUri).forward(req, resp);
+            return;
+        }
         req.setAttribute("name", "Alexander");
         req.setAttribute("hello", "Hello, world! ");
         getServletContext().getRequestDispatcher("/hello.jsp").forward(req, resp);
+
     }
 }

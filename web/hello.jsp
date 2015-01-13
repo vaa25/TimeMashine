@@ -21,6 +21,8 @@
     <c:if test="${!empty name}">
         ${name}
     </c:if>
+        <a href="map.jsp">Open map</a>
 </h1>
+
 </body>
 </html>
