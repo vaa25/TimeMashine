@@ -13,7 +13,7 @@
         }
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
-    <script type="text/javascript" src="../src/maplabel-compiled.js"></script>
+    <script type="text/javascript" src="../maplabel.js"></script>
     <script type="text/javascript">
         var poly;
         var Latitude = null;
@@ -38,18 +38,18 @@
 
             poly.setMap(map);
 
-//            var mapLabel = new MapLabel({   // ошибка где-то здесь
-//                text: 'Yerusalem',
-//                position: yerusalem,
-//                map: map,
-//                fontSize: 35,
-//                align: 'right'
-//            });
+            var mapLabel = new MapLabel({   // ошибка где-то здесь
+                text: 'Yerusalem',
+                position: yerusalem,
+                map: map,
+                fontSize: 35,
+                align: 'right'
+            });
 
-//        var marker = new google.maps.Marker;
-//        marker.bindTo('map', mapLabel);
-//        marker.bindTo('position', mapLabel);
-//        marker.setDraggable(false);
+            var marker = new google.maps.Marker;
+            marker.bindTo('map', mapLabel);
+            marker.bindTo('position', mapLabel);
+            marker.setDraggable(false);
 
             var myVar = setInterval(function () {
                 updateposition()
