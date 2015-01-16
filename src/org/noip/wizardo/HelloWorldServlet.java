@@ -1,6 +1,6 @@
-package com.my.time_mashine;
+package org.noip.wizardo;
 
-import com.my.time_mashine.coords.Yerusalem;
+import org.noip.wizardo.coords.Yerusalem;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

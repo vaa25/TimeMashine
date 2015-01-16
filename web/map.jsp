@@ -14,7 +14,7 @@
         }
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
-    <script type="text/javascript" src="../maplabel.js"></script>
+    <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/maplabel/src/maplabel-compiled.js"></script>
     <script type="text/javascript">
         var poly;
         var Latitude = null;

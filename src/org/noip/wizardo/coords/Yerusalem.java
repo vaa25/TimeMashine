@@ -1,4 +1,4 @@
-package com.my.time_mashine.coords;
+package org.noip.wizardo.coords;
 
 /**
  * Created by Б on 15.01.2015.
