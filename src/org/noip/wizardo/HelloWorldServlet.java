@@ -1,6 +1,9 @@
 package org.noip.wizardo;
 
+import com.google.gson.Gson;
 import org.noip.wizardo.coords.Yerusalem;
+import org.noip.wizardo.coords.Zion;
+import org.noip.wizardo.lines.LineYerusalemZion;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +17,10 @@ import java.io.IOException;
 public class HelloWorldServlet extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("yerusalem", new Yerusalem());
+        req.setAttribute("zion", new Zion());
+        Gson gson = new Gson();
+        String gsoned = gson.toJson(new LineYerusalemZion());
+        req.setAttribute("lineYerZion", gson.toJsonTree(gsoned));
         getServletContext().getRequestDispatcher("/map.jsp").forward(req, resp);
     }
 }

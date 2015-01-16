@@ -3,9 +3,10 @@ package org.noip.wizardo.coords;
 /**
  * Created by Б on 15.01.2015.
  */
-public class Yerusalem extends Coords {
+public class Yerusalem extends Point {
     public Yerusalem() {
-        latitude = 31.76904;
-        longitude = 35.21633;
+        latitude = Util.toWgc("31°46'42");
+        longitude = Util.toWgc("35°13'54");
+        name = "Yerusalem";
     }
 }

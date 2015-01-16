@@ -3,7 +3,7 @@ package org.noip.wizardo.coords;
 /**
  * Created by Б on 15.01.2015.
  */
-public abstract class Coords {
+public abstract class Coord {
     protected double latitude;
     protected double longitude;
 

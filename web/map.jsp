@@ -16,60 +16,72 @@
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
     <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/maplabel/src/maplabel-compiled.js"></script>
     <script type="text/javascript">
-        var poly;
+        var polyline;
         var Latitude = null;
         var Longitude = null;
         var map = null;
         var path = [];
-        var yerusalem = new google.maps.LatLng(
+
+
+        function getLatLng(coord) {
+            return new google.maps.LatLng(coord.latitude, coord.longitude);
+        }
+        var yerusalemLatLng = new google.maps.LatLng(
                 ${yerusalem.latitude},
                 ${yerusalem.longitude}
         );
-
+        var zionLatLng = new google.maps.LatLng(
+                ${zion.latitude},
+                ${zion.longitude}
+        );
         function initialize() {
             var mapOptions = {
-                zoom: 2,
-                center: new google.maps.LatLng(0, 0),
+                zoom: 15,
+                center: yerusalemLatLng,
                 mapTypeId: google.maps.MapTypeId.SATELLITE
             };
+
             map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-            poly = new google.maps.Polyline({
+
+            var path = [
+                yerusalemLatLng,
+                zionLatLng
+            ];
+            polyline = new google.maps.Polyline({
                 path: path,
                 strokeColor: '#FF0000',
                 strokeOpacity: 1.0,
                 strokeWeight: 2,
                 map: map
             });
-            poly.setMap(map);
 
-            var mapLabel = new MapLabel({
+            polyline.setMap(map);
+
+            var yerusalemMapLabel = new MapLabel({
                 text: 'Yerusalem',
-                position: yerusalem,
+                position: yerusalemLatLng,
                 map: map,
                 fontSize: 35,
                 align: 'right'
             });
 
-            var marker = new google.maps.Marker;
-            marker.bindTo('map', mapLabel);
-            marker.bindTo('position', mapLabel);
-            marker.setDraggable(false);
+            var yerusalemMarker = new google.maps.Marker;
+            yerusalemMarker.bindTo('map', yerusalemMapLabel);
+            yerusalemMarker.bindTo('position', yerusalemMapLabel);
+            yerusalemMarker.setDraggable(false);
 
-            var myVar = setInterval(function () {
-                updateposition()
-            }, 200);
+            var zionMapLabel = new MapLabel({
+                text: 'Zion',
+                position: zionLatLng,
+                map: map,
+                fontSize: 35,
+                align: 'right'
+            });
 
-        }
-
-        function updateposition() {
-            path.push(yerusalem);
-            if (path.length == 1) {
-                map.setCenter(path[0]);
-                map.setZoom(8);
-            } else {
-                map.setCenter(path[path.length - 1]);
-            }
-            poly.setPath(path);
+            var zionMarker = new google.maps.Marker;
+            zionMarker.bindTo('map', zionMapLabel);
+            zionMarker.bindTo('position', zionMapLabel);
+            zionMarker.setDraggable(false);
         }
         google.maps.event.addDomListener(window, 'load', initialize);
     </script>
