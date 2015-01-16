@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +21,10 @@
         var Longitude = null;
         var map = null;
         var path = [];
-        var yerusalem = new google.maps.LatLng(31.76904, 35.21633);
+        var yerusalem = new google.maps.LatLng(
+                ${yerusalem.latitude},
+                ${yerusalem.longitude}
+        );
 
         function initialize() {
             var mapOptions = {
@@ -33,12 +37,12 @@
                 path: path,
                 strokeColor: '#FF0000',
                 strokeOpacity: 1.0,
-                strokeWeight: 2
+                strokeWeight: 2,
+                map: map
             });
-
             poly.setMap(map);
 
-            var mapLabel = new MapLabel({   // ошибка где-то здесь
+            var mapLabel = new MapLabel({
                 text: 'Yerusalem',
                 position: yerusalem,
                 map: map,
@@ -56,16 +60,8 @@
             }, 200);
 
         }
-        //create map
 
         function updateposition() {
-
-            var date = new Date();
-            var time = date.getMinutes() * 60 + date.getSeconds();
-            Latitude = 31.76904;
-            Longitude = 35.21633;
-//      Latitude= 45*Math.sin((time-1800)*Math.PI/1800.0)
-//      Longitude= (time/10)-180;
             path.push(yerusalem);
             if (path.length == 1) {
                 map.setCenter(path[0]);
@@ -76,7 +72,6 @@
             poly.setPath(path);
         }
         google.maps.event.addDomListener(window, 'load', initialize);
-
     </script>
 </head>
 <body>
