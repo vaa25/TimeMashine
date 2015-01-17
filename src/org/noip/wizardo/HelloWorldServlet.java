@@ -20,7 +20,7 @@ public class HelloWorldServlet extends HttpServlet {
         req.setAttribute("zion", new Zion());
         Gson gson = new Gson();
         String gsoned = gson.toJson(new LineYerusalemZion());
-        req.setAttribute("lineYerZion", gson.toJsonTree(gsoned));
+        req.setAttribute("lineYerZion", gsoned);
         getServletContext().getRequestDispatcher("/map.jsp").forward(req, resp);
     }
 }

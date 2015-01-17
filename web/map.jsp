@@ -35,6 +35,10 @@
                 ${zion.longitude}
         );
         function initialize() {
+            <c:forEach var="coord" items="${lineYerZion}">
+
+            console.log(${coord});
+            </c:forEach>
             var mapOptions = {
                 zoom: 15,
                 center: yerusalemLatLng,
