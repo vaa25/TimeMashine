@@ -16,76 +16,79 @@
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
     <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/maplabel/src/maplabel-compiled.js"></script>
     <script type="text/javascript">
-        var polyline;
-        var Latitude = null;
-        var Longitude = null;
-        var map = null;
-        var path = [];
 
 
-        function getLatLng(coord) {
-            return new google.maps.LatLng(coord.latitude, coord.longitude);
-        }
-        var yerusalemLatLng = new google.maps.LatLng(
-                ${yerusalem.latitude},
-                ${yerusalem.longitude}
-        );
-        var zionLatLng = new google.maps.LatLng(
-                ${zion.latitude},
-                ${zion.longitude}
-        );
         function initialize() {
-            <c:forEach var="coord" items="${lineYerZion}">
-
-            console.log(${coord});
-            </c:forEach>
+            var points =${polyline};
             var mapOptions = {
                 zoom: 15,
-                center: yerusalemLatLng,
+                center: getLatLng(points[0]),
                 mapTypeId: google.maps.MapTypeId.SATELLITE
             };
+            var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+            var markers = getMarkers(points);
+            var line = getPolyline(points);
 
-            map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+            function getLatLng(coord) {
+                return new google.maps.LatLng(coord.latitude, coord.longitude);
+            }
 
-            var path = [
-                yerusalemLatLng,
-                zionLatLng
-            ];
-            polyline = new google.maps.Polyline({
-                path: path,
-                strokeColor: '#FF0000',
-                strokeOpacity: 1.0,
-                strokeWeight: 2,
-                map: map
-            });
+            function getPolyline(points) {
+                return new google.maps.Polyline({
+                    path: getPath(points),
+                    strokeColor: '#FF0000',
+                    strokeOpacity: 1.0,
+                    strokeWeight: 2,
+                    map: map
+                });
+            }
 
-            polyline.setMap(map);
+            function getMapLabel(point) {
+                return new MapLabel({
+                    text: getName(point),
+                    position: getLatLng(point),
+                    map: map,
+                    fontSize: 35,
+                    align: 'right'
+                });
+            }
 
-            var yerusalemMapLabel = new MapLabel({
-                text: 'Yerusalem',
-                position: yerusalemLatLng,
-                map: map,
-                fontSize: 35,
-                align: 'right'
-            });
+            function getMarker(point) {
+                var marker = new google.maps.Marker;
+                var mapLabel = getMapLabel(point);
+                marker.bindTo('map', mapLabel);
+                marker.bindTo('position', mapLabel);
+                marker.setDraggable(false);
+                return marker;
+            }
 
-            var yerusalemMarker = new google.maps.Marker;
-            yerusalemMarker.bindTo('map', yerusalemMapLabel);
-            yerusalemMarker.bindTo('position', yerusalemMapLabel);
-            yerusalemMarker.setDraggable(false);
+            function getMarkers(points) {
+                var markers = [];
+                points.forEach(function (e) {
+                    markers.push(getMarker(e));
+                });
+                return markers;
+            }
 
-            var zionMapLabel = new MapLabel({
-                text: 'Zion',
-                position: zionLatLng,
-                map: map,
-                fontSize: 35,
-                align: 'right'
-            });
+            function getPoints(poly) {
+                var points = [];
+                poly.forEach(function (e) {
+                    points.push(e);
+                });
+                return points;
+            }
 
-            var zionMarker = new google.maps.Marker;
-            zionMarker.bindTo('map', zionMapLabel);
-            zionMarker.bindTo('position', zionMapLabel);
-            zionMarker.setDraggable(false);
+            function getPath(points) {
+                var path = [];
+                points.forEach(function (e) {
+                    path.push(getLatLng(e));
+                });
+                return path;
+            }
+
+            function getName(point) {
+                return point.name;
+            }
         }
         google.maps.event.addDomListener(window, 'load', initialize);
     </script>

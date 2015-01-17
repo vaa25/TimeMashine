@@ -10,7 +10,6 @@ import java.util.List;
  */
 public class Line extends ArrayList<Coord> {
     protected List<Coord> coords;
-
     public List<Coord> getCoords() {
         return coords;
     }
