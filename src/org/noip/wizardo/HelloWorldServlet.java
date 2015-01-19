@@ -5,6 +5,7 @@ import org.noip.wizardo.coords.MountOfOlives;
 import org.noip.wizardo.coords.Point;
 import org.noip.wizardo.coords.Yerusalem;
 import org.noip.wizardo.coords.Zion;
+import org.noip.wizardo.grabber.PolygonGrabber;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -26,6 +27,16 @@ public class HelloWorldServlet extends HttpServlet {
         Gson gson = new Gson();
         String gsoned = gson.toJson(polyline);
         req.setAttribute("polyline", gsoned);
+//        try {
+        String title = "Город Давида";
+        PolygonGrabber grabber = new PolygonGrabber(title);
+        grabber.setLanguage("ru");
+        grabber.downloadWm();
+//            req.setAttribute("yerusalem", grabber.getPlace());
+//            System.out.println( grabber.getPlace());
+//        } catch (InvalidArgumentException e) {
+//            e.printStackTrace();
+//        }
         getServletContext().getRequestDispatcher("/map.jsp").forward(req, resp);
     }
 }
