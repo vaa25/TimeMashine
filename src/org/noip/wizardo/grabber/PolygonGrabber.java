@@ -1,7 +1,6 @@
 package org.noip.wizardo.grabber;
 
 import com.google.gson.Gson;
-import com.sun.javaws.exceptions.InvalidArgumentException;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -116,15 +115,15 @@ public class PolygonGrabber {
         }
     }
 
-    public String getPlace() throws InvalidArgumentException {
+    public String getPlace() throws IllegalArgumentException {
         return toGson(builder.getPlace(wm));
     }
 
-    public String getCenter() throws InvalidArgumentException {
+    public String getCenter() throws IllegalArgumentException {
         return toGson(builder.getLocationCenter(wm));
     }
 
-    public String getPolygons() throws InvalidArgumentException {
+    public String getPolygons() throws IllegalArgumentException {
         QueryBuilder builder = new QueryBuilder();
         builder.setPlaceTitle(name);
         return toGson(builder.getPolygons(wm));

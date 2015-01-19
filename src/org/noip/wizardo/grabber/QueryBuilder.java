@@ -1,7 +1,5 @@
 package org.noip.wizardo.grabber;
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
-
 import java.util.List;
 
 /**
@@ -11,35 +9,35 @@ public class QueryBuilder {
     private String placeTitle;
     private boolean error = false;
 
-    public org.noip.wizardo.coords.Place getPlace(Wm wm) throws InvalidArgumentException {
+    public org.noip.wizardo.coords.Place getPlace(Wm wm) throws IllegalArgumentException {
         Place place = selectPlace(wm);
         return new org.noip.wizardo.coords.Place(
                 place.getPolygons(), place.getLocationCenter(), placeTitle
         );
     }
 
-    public List<Polygon> getPolygons(Wm wm) throws InvalidArgumentException {
+    public List<Polygon> getPolygons(Wm wm) throws IllegalArgumentException {
         return selectPlace(wm).getPolygons();
     }
 
-    public Polygon getLocationCenter(Wm wm) throws InvalidArgumentException {
+    public Polygon getLocationCenter(Wm wm) throws IllegalArgumentException {
         return selectPlace(wm).getLocationCenter();
     }
 
-    private Place selectPlace(Wm wm) throws InvalidArgumentException {
+    private Place selectPlace(Wm wm) throws IllegalArgumentException {
         List<Place> places = wm.getPlaces();
         Place result = null;
         for (Place place : places) {
             if (checkPlaceTitle(place)) {
                 if (error) {
-                    throw new InvalidArgumentException(new String[]{"Not unique placeTitle '" + placeTitle + '\''});
+                    throw new IllegalArgumentException("Not unique placeTitle '" + placeTitle + '\'');
                 }
                 result = place;
                 error = true;
             }
         }
         if (!error) {
-            throw new InvalidArgumentException(new String[]{"No one placeTitle equals '" + placeTitle + '\''});
+            throw new IllegalArgumentException("No one placeTitle equals '" + placeTitle + '\'');
         }
         error = false;
         return result;

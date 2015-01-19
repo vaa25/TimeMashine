@@ -27,16 +27,16 @@ public class HelloWorldServlet extends HttpServlet {
         Gson gson = new Gson();
         String gsoned = gson.toJson(polyline);
         req.setAttribute("polyline", gsoned);
-//        try {
-        String title = "Город Давида";
-        PolygonGrabber grabber = new PolygonGrabber(title);
-        grabber.setLanguage("ru");
-        grabber.downloadWm();
-//            req.setAttribute("yerusalem", grabber.getPlace());
+        try {
+            String title = "Город Давида";
+            PolygonGrabber grabber = new PolygonGrabber(title);
+            grabber.setLanguage("ru");
+            grabber.downloadWm();
+            req.setAttribute("yerusalem", grabber.getPlace());
 //            System.out.println( grabber.getPlace());
-//        } catch (InvalidArgumentException e) {
-//            e.printStackTrace();
-//        }
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
         getServletContext().getRequestDispatcher("/map.jsp").forward(req, resp);
     }
 }
