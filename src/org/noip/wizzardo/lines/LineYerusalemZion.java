@@ -1,8 +1,8 @@
-package org.noip.wizardo.lines;
+package org.noip.wizzardo.lines;
 
-import org.noip.wizardo.coords.Coord;
-import org.noip.wizardo.coords.Yerusalem;
-import org.noip.wizardo.coords.Zion;
+import org.noip.wizzardo.coords.Coord;
+import org.noip.wizzardo.coords.Yerusalem;
+import org.noip.wizzardo.coords.Zion;
 
 import java.util.ArrayList;
 

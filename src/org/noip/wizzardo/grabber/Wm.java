@@ -1,4 +1,4 @@
-package org.noip.wizardo.grabber;
+package org.noip.wizzardo.grabber;
 
 import java.util.List;
 

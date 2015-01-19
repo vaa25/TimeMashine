@@ -1,11 +1,11 @@
-package org.noip.wizardo;
+package org.noip.wizzardo;
 
 import com.google.gson.Gson;
-import org.noip.wizardo.coords.MountOfOlives;
-import org.noip.wizardo.coords.Point;
-import org.noip.wizardo.coords.Yerusalem;
-import org.noip.wizardo.coords.Zion;
-import org.noip.wizardo.grabber.PolygonGrabber;
+import org.noip.wizzardo.coords.MountOfOlives;
+import org.noip.wizzardo.coords.Point;
+import org.noip.wizzardo.coords.Yerusalem;
+import org.noip.wizzardo.coords.Zion;
+import org.noip.wizzardo.grabber.PolygonGrabber;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

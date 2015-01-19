@@ -1,6 +1,6 @@
-package org.noip.wizardo.lines;
+package org.noip.wizzardo.lines;
 
-import org.noip.wizardo.coords.Coord;
+import org.noip.wizzardo.coords.Coord;
 
 import java.util.ArrayList;
 import java.util.List;

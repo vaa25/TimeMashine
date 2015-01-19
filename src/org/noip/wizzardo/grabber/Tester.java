@@ -1,4 +1,4 @@
-package org.noip.wizardo.grabber;
+package org.noip.wizzardo.grabber;
 
 /**
  * Created by Б on 19.01.2015.

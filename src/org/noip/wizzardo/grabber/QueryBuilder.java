@@ -1,4 +1,4 @@
-package org.noip.wizardo.grabber;
+package org.noip.wizzardo.grabber;
 
 import java.util.List;
 
@@ -9,9 +9,9 @@ public class QueryBuilder {
     private String placeTitle;
     private boolean error = false;
 
-    public org.noip.wizardo.coords.Place getPlace(Wm wm) throws IllegalArgumentException {
+    public org.noip.wizzardo.coords.Place getPlace(Wm wm) throws IllegalArgumentException {
         Place place = selectPlace(wm);
-        return new org.noip.wizardo.coords.Place(
+        return new org.noip.wizzardo.coords.Place(
                 place.getPolygons(), place.getLocationCenter(), placeTitle
         );
     }

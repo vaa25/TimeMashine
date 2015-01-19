@@ -1,4 +1,4 @@
-package org.noip.wizardo.coords;
+package org.noip.wizzardo.coords;
 
 /**
  * Created by Б on 15.01.2015.

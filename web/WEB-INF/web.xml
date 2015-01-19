@@ -6,7 +6,7 @@
 
     <servlet>
         <servlet-name>HelloServlet</servlet-name>
-        <servlet-class>org.noip.wizardo.HelloWorldServlet</servlet-class>
+        <servlet-class>org.noip.wizzardo.HelloWorldServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HelloServlet</servlet-name>

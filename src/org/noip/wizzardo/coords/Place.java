@@ -1,6 +1,6 @@
-package org.noip.wizardo.coords;
+package org.noip.wizzardo.coords;
 
-import org.noip.wizardo.grabber.Polygon;
+import org.noip.wizzardo.grabber.Polygon;
 
 import java.util.List;
 
