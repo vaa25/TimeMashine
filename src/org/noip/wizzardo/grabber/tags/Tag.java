@@ -1,4 +1,4 @@
-package org.noip.wizzardo.grabber;
+package org.noip.wizzardo.grabber.tags;
 
 /**
  * Created by Б on 19.01.2015.

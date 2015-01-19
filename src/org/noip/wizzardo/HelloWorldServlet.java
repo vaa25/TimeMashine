@@ -28,12 +28,11 @@ public class HelloWorldServlet extends HttpServlet {
         String gsoned = gson.toJson(polyline);
         req.setAttribute("polyline", gsoned);
         try {
-            String title = "Город Давида";
-            PolygonGrabber grabber = new PolygonGrabber(title);
+            PolygonGrabber grabber = new PolygonGrabber(31, 35, "Город Давида");
             grabber.setLanguage("ru");
             grabber.downloadWm();
             req.setAttribute("yerusalem", grabber.getPlace());
-//            System.out.println( grabber.getPlace());
+            System.out.println(grabber.getPlace());
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }

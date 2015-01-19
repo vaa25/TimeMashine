@@ -28,7 +28,12 @@
             var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
             var markers = getMarkers(points);
             var line = getPolyline(points);
+            var yerusalem =${yerusalem};
+            markers.add(getMarker(yerusalem));
 
+            function getLatLng(place) {
+                return getLatLng(place.center);
+            }
             function getLatLng(coord) {
                 return new google.maps.LatLng(coord.latitude, coord.longitude);
             }
@@ -45,7 +50,7 @@
 
             function getMapLabel(point) {
                 return new MapLabel({
-                    text: getName(point),
+                    text: getTitle(point),
                     position: getLatLng(point),
                     map: map,
                     fontSize: 35,
@@ -86,8 +91,8 @@
                 return path;
             }
 
-            function getName(point) {
-                return point.name;
+            function getTitle(point) {
+                return point.title;
             }
         }
         google.maps.event.addDomListener(window, 'load', initialize);

@@ -7,6 +7,6 @@ public class Yerusalem extends Point {
     public Yerusalem() {
         latitude = Util.toWgc("31°46'42");
         longitude = Util.toWgc("35°13'54");
-        name = "Yerusalem";
+        title = "Yerusalem";
     }
 }

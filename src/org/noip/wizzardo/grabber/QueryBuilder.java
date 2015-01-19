@@ -1,5 +1,9 @@
 package org.noip.wizzardo.grabber;
 
+import org.noip.wizzardo.grabber.tags.Place;
+import org.noip.wizzardo.grabber.tags.Polygon;
+import org.noip.wizzardo.grabber.tags.Wm;
+
 import java.util.List;
 
 /**
@@ -7,7 +11,6 @@ import java.util.List;
  */
 public class QueryBuilder {
     private String placeTitle;
-    private boolean error = false;
 
     public org.noip.wizzardo.coords.Place getPlace(Wm wm) throws IllegalArgumentException {
         Place place = selectPlace(wm);
@@ -27,19 +30,19 @@ public class QueryBuilder {
     private Place selectPlace(Wm wm) throws IllegalArgumentException {
         List<Place> places = wm.getPlaces();
         Place result = null;
+        boolean foundOne = false;
         for (Place place : places) {
             if (checkPlaceTitle(place)) {
-                if (error) {
+                if (foundOne) {
                     throw new IllegalArgumentException("Not unique placeTitle '" + placeTitle + '\'');
                 }
                 result = place;
-                error = true;
+                foundOne = true;
             }
         }
-        if (!error) {
+        if (!foundOne) {
             throw new IllegalArgumentException("No one placeTitle equals '" + placeTitle + '\'');
         }
-        error = false;
         return result;
     }
 

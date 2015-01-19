@@ -1,6 +1,6 @@
 package org.noip.wizzardo.coords;
 
-import org.noip.wizzardo.grabber.Polygon;
+import org.noip.wizzardo.grabber.tags.Polygon;
 
 import java.util.List;
 
@@ -16,6 +16,15 @@ public class Place {
         this.polygons = polygons;
         this.center = center;
         this.title = title;
+    }
+
+    @Override
+    public String toString() {
+        return "Place{" +
+                "polygons=" + org.noip.wizzardo.grabber.Util.toString(polygons) +
+                ", \ncenter=" + center +
+                ", \ntitle='" + title + '\'' +
+                '}';
     }
 
     public List<Polygon> getPolygons() {

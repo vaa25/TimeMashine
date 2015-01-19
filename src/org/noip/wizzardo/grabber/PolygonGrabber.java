@@ -1,6 +1,7 @@
 package org.noip.wizzardo.grabber;
 
 import com.google.gson.Gson;
+import org.noip.wizzardo.grabber.tags.Wm;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -49,9 +50,9 @@ public class PolygonGrabber {
 
     private String getUrl() {
         return "http://api.wikimapia.org/?" +
-                "key=example&" +
-                "function=place.search&" +
-                "q=" + name.replaceAll(" ", "+") +
+                "key=example" + //getMyKey()+
+                "&function=place.search" +
+                "&q=" + name.replaceAll(" ", "+") +
                 "&lat=" + latitude +
                 "&lon=" + longitude +
                 "&format=json" +
@@ -62,10 +63,10 @@ public class PolygonGrabber {
                 "&category=" +
                 "&categories_or=" +
                 "&categories_and=" +
-                "&distance=" + distance;
+                "&distance=" + ((distance > 0) ? distance : "");
     }
 
-    private String getKey() {
+    private String getMyKey() {
         return "EDE1F443-8256FDD6-EACCDBEA-D17E8FF5-5239E7AD-411FE4C4-F6210DEE-BA2473D2";
     }
 
@@ -88,6 +89,7 @@ public class PolygonGrabber {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println(result);
         return result;
     }
 

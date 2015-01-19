@@ -1,5 +1,8 @@
 package org.noip.wizzardo.grabber;
 
+import com.google.gson.Gson;
+import org.noip.wizzardo.coords.Place;
+
 /**
  * Created by Б on 19.01.2015.
  */
@@ -10,7 +13,10 @@ public class Tester {
             PolygonGrabber grabber = new PolygonGrabber(title);
             grabber.setLanguage("ru");
             grabber.downloadWm();
-            System.out.println(grabber.getPlace());
+            String place = grabber.getPlace();
+            System.out.println(place);
+            Gson gson = new Gson();
+            System.out.println(gson.fromJson(place, Place.class));
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
