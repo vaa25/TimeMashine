@@ -20,6 +20,8 @@ public class QueryBuilder {
 //        } catch (UnsupportedEncodingException e) {
 //            e.printStackTrace();
 //        }
+//        System.out.println(place.getTitle());
+//        System.out.println(place);
         return new org.noip.wizzardo.coords.Place(place.getPolygons(), place.getLocationCenter(), title);
     }
 

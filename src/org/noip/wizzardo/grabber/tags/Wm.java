@@ -13,6 +13,7 @@ public class Wm {
     private List<Place> places;
     private int page;
     private int count;
+    private Debug debug;
 
     @Override
     public String toString() {
@@ -22,9 +23,13 @@ public class Wm {
                 ", \nplaces=" + Util.toString(places) +
                 ", \npage=" + page +
                 ", \ncount=" + count +
+                ", \ndebug=" + debug +
                 '}';
     }
 
+    public boolean isAvailable() {
+        return (debug == null);
+    }
     public List<Place> getPlaces() {
         return places;
     }

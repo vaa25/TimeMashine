@@ -2,6 +2,7 @@ package org.noip.wizzardo.grabber;
 
 import com.google.gson.Gson;
 import org.noip.wizzardo.coords.Place;
+import org.noip.wizzardo.grabber.tags.Wm;
 
 import java.io.UnsupportedEncodingException;
 
@@ -10,19 +11,28 @@ import java.io.UnsupportedEncodingException;
  */
 public class Tester {
     public static void main(String[] args) {
+        String title = "Город Давида";
+        test(title);
+        title = "Масличная гора";
+        test(title);
+    }
+
+    private static void test(String title) {
         try {
-            String title = "Город Давида";
-            PolygonGrabber grabber = new PolygonGrabber(title);
+            WmDownloader grabber = new WmDownloader(title);
             grabber.setLanguage("ru");
-            grabber.downloadWm();
-            String place = grabber.getPlace();
+            Wm wm = grabber.downloadWm();
+            QueryBuilder builder = new QueryBuilder();
+            builder.setPlaceTitle(title);
+            Place place = builder.getPlace(wm);
             System.out.println(place);
             Gson gson = new Gson();
-            System.out.println(gson.fromJson(place, Place.class));
+            System.out.println(gson.toJson(place));
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
     }
+
 }

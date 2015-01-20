@@ -1,6 +1,9 @@
 package org.noip.wizzardo;
 
-import org.noip.wizzardo.grabber.PolygonGrabber;
+import com.google.gson.Gson;
+import org.noip.wizzardo.grabber.QueryBuilder;
+import org.noip.wizzardo.grabber.WmDownloader;
+import org.noip.wizzardo.grabber.tags.Wm;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -22,10 +25,13 @@ public class HelloWorldServlet extends HttpServlet {
 
     private String getPlace(String title, String language) {
         try {
-            PolygonGrabber grabber = new PolygonGrabber(title);
+            WmDownloader grabber = new WmDownloader(title);
             grabber.setLanguage(language);
-            grabber.downloadWm();
-            return grabber.getPlace();
+            Wm wm = grabber.downloadWm();
+            QueryBuilder builder = new QueryBuilder();
+            builder.setPlaceTitle(title);
+            Gson gson = new Gson();
+            return gson.toJson(builder.getPlace(wm));
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {

@@ -10,40 +10,40 @@ import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 
 /**
  * Created by Б on 18.01.2015.
  */
-public class PolygonGrabber {
+public class WmDownloader {
     private double latitude;
     private double longitude;
     private double distance;
     private String name;
     private String language = "en";
-    private Wm wm;
     private QueryBuilder builder = new QueryBuilder();
 
-    public PolygonGrabber(String name) {
+    public WmDownloader(String name) {
         this(31, 35, 0, name);
     }
 
-    public PolygonGrabber(double latitude, double longitude, double distance, String name) {
+    public WmDownloader(double latitude, double longitude, double distance, String name) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.distance = distance;
         this.name = name;
-        builder.setPlaceTitle(name);
+
     }
 
-    public PolygonGrabber(double latitude, double longitude, double distance) {
+    public WmDownloader(double latitude, double longitude, double distance) {
         this(latitude, longitude, distance, "");
     }
 
-    public PolygonGrabber(double latitude, double longitude, String name) {
+    public WmDownloader(double latitude, double longitude, String name) {
         this(latitude, longitude, 0, name);
     }
 
-    public PolygonGrabber(double latitude, double longitude) {
+    public WmDownloader(double latitude, double longitude) {
         this(latitude, longitude, 100, "");
     }
 
@@ -90,15 +90,17 @@ public class PolygonGrabber {
         return result;
     }
 
-    private String toUtf8(String urlToRead) throws UnsupportedEncodingException {
-        byte[] bytes = urlToRead.getBytes(Charset.defaultCharset());
-        urlToRead = new String(bytes, "UTF8");
-        return urlToRead;
-    }
-
-    public void downloadWm() throws UnsupportedEncodingException {
+    public Wm downloadWm() throws UnsupportedEncodingException {
         Gson gson = new Gson();
-        wm = gson.fromJson(getHTML(getUrl()), Wm.class);
+        String json = getHTML(getUrl());
+        Wm newWm = gson.fromJson(json, Wm.class);
+        if (newWm.isAvailable()) {
+            save(name + ".json", json);
+        } else {
+            json = load(name + ".json");
+            newWm = gson.fromJson(json, Wm.class);
+        }
+        return newWm;
     }
 
     public void setLanguage(String language) {
@@ -108,6 +110,20 @@ public class PolygonGrabber {
     private String toGson(Object object) {
         Gson gson = new Gson();
         return gson.toJson(object);
+    }
+
+    private String load(String file) {
+        StringBuilder result = new StringBuilder();
+        try {
+            Path path = new File(file).toPath();
+            List<String> lines = Files.readAllLines(path, Charset.forName("UTF8"));
+            for (String line : lines) {
+                result.append(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result.toString();
     }
 
     private void save(String file, String value) {
@@ -120,17 +136,8 @@ public class PolygonGrabber {
         }
     }
 
-    public String getPlace() throws IllegalArgumentException {
-        return toGson(builder.getPlace(wm));
-    }
-
-    public String getCenter() throws IllegalArgumentException {
-        return toGson(builder.getLocationCenter(wm));
-    }
-
-    public String getPolygons() throws IllegalArgumentException {
-        QueryBuilder builder = new QueryBuilder();
+    public String getPlace(Wm wm) throws IllegalArgumentException {
         builder.setPlaceTitle(name);
-        return toGson(builder.getPolygons(wm));
+        return toGson(builder.getPlace(wm));
     }
 }
