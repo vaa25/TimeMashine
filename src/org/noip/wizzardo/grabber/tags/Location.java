@@ -42,6 +42,6 @@ public class Location {
     }
 
     public Polygon getCenter() {
-        return new Polygon(lat, lon);
+        return new Polygon(lon, lat);
     }
 }

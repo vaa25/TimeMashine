@@ -16,83 +16,75 @@
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
     <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/maplabel/src/maplabel-compiled.js"></script>
     <script type="text/javascript">
-
-
         function initialize() {
-            var points =${polyline};
+            var yerusalem =${yerusalem};
+            var olives =${olives};
             var mapOptions = {
                 zoom: 15,
-                center: getLatLng(points[0]),
+                center: getLatLng(yerusalem.center),
                 mapTypeId: google.maps.MapTypeId.SATELLITE
             };
             var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-            var markers = getMarkers(points);
-            var line = getPolyline(points);
-            var yerusalem =${yerusalem};
-            markers.add(getMarker(yerusalem));
 
-            function getLatLng(place) {
-                return getLatLng(place.center);
-            }
-            function getLatLng(coord) {
-                return new google.maps.LatLng(coord.latitude, coord.longitude);
-            }
+            var markers = [];
+            markers[markers.length] = getMarker(yerusalem);
+            markers[markers.length] = getMarker(olives);
 
-            function getPolyline(points) {
-                return new google.maps.Polyline({
-                    path: getPath(points),
-                    strokeColor: '#FF0000',
-                    strokeOpacity: 1.0,
+            var polygons = [];
+            polygons[polygons.length] = getPolygons(yerusalem);
+            polygons[polygons.length] = getPolygons(olives);
+
+            function getPolygons(place) {
+                return new google.maps.Polygon({
+                    path: getLatLons(place.polygons),
+                    strokeColor: "#FF0000",
+                    strokeOpacity: 0.8,
                     strokeWeight: 2,
+                    fillColor: "#FF0000",
+                    fillOpacity: 0.35,
                     map: map
                 });
             }
 
-            function getMapLabel(point) {
-                return new MapLabel({
-                    text: getTitle(point),
-                    position: getLatLng(point),
-                    map: map,
-                    fontSize: 35,
-                    align: 'right'
-                });
+            function getLatLons(polygons) {
+                var latLon = [];
+                for (var polygon in polygons) {
+                    if (polygons.hasOwnProperty(polygon)) {
+                        latLon[latLon.length] = getLatLng(polygons[polygon]);
+                    }
+                }
+                return latLon;
             }
 
-            function getMarker(point) {
+            function getMarker(place) {
                 var marker = new google.maps.Marker;
-                var mapLabel = getMapLabel(point);
+                var mapLabel = getMapLabel(place);
                 marker.bindTo('map', mapLabel);
                 marker.bindTo('position', mapLabel);
                 marker.setDraggable(false);
                 return marker;
             }
 
-            function getMarkers(points) {
+            function getLatLng(polygon) {
+                return new google.maps.LatLng(polygon.y, polygon.x);
+            }
+
+            function getMapLabel(place) {
+                return new MapLabel({
+                    text: place.title,
+                    position: getLatLng(place.center),
+                    map: map,
+                    fontSize: 35,
+                    align: 'right'
+                });
+            }
+
+            function getMarkers(places) {
                 var markers = [];
-                points.forEach(function (e) {
+                places.forEach(function (e) {
                     markers.push(getMarker(e));
                 });
                 return markers;
-            }
-
-            function getPoints(poly) {
-                var points = [];
-                poly.forEach(function (e) {
-                    points.push(e);
-                });
-                return points;
-            }
-
-            function getPath(points) {
-                var path = [];
-                points.forEach(function (e) {
-                    path.push(getLatLng(e));
-                });
-                return path;
-            }
-
-            function getTitle(point) {
-                return point.title;
             }
         }
         google.maps.event.addDomListener(window, 'load', initialize);

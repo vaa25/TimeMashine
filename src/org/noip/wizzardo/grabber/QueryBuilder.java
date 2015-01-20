@@ -14,9 +14,13 @@ public class QueryBuilder {
 
     public org.noip.wizzardo.coords.Place getPlace(Wm wm) throws IllegalArgumentException {
         Place place = selectPlace(wm);
-        return new org.noip.wizzardo.coords.Place(
-                place.getPolygons(), place.getLocationCenter(), placeTitle
-        );
+        String title = placeTitle;
+//        try {
+//            title= URLEncoder.encode(placeTitle, "UTF-8");
+//        } catch (UnsupportedEncodingException e) {
+//            e.printStackTrace();
+//        }
+        return new org.noip.wizzardo.coords.Place(place.getPolygons(), place.getLocationCenter(), title);
     }
 
     public List<Polygon> getPolygons(Wm wm) throws IllegalArgumentException {

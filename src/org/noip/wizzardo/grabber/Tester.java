@@ -3,6 +3,8 @@ package org.noip.wizzardo.grabber;
 import com.google.gson.Gson;
 import org.noip.wizzardo.coords.Place;
 
+import java.io.UnsupportedEncodingException;
+
 /**
  * Created by Б on 19.01.2015.
  */
@@ -18,6 +20,8 @@ public class Tester {
             Gson gson = new Gson();
             System.out.println(gson.fromJson(place, Place.class));
         } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
     }

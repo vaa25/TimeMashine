@@ -3,12 +3,11 @@ package org.noip.wizzardo.grabber;
 import com.google.gson.Gson;
 import org.noip.wizzardo.grabber.tags.Wm;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -48,11 +47,11 @@ public class PolygonGrabber {
         this(latitude, longitude, 100, "");
     }
 
-    private String getUrl() {
+    private String getUrl() throws UnsupportedEncodingException {
         return "http://api.wikimapia.org/?" +
                 "key=example" + //getMyKey()+
                 "&function=place.search" +
-                "&q=" + name.replaceAll(" ", "+") +
+                "&q=" + URLEncoder.encode(name, "UTF-8").replaceAll(" ", "+") +
                 "&lat=" + latitude +
                 "&lon=" + longitude +
                 "&format=json" +
@@ -70,8 +69,7 @@ public class PolygonGrabber {
         return "EDE1F443-8256FDD6-EACCDBEA-D17E8FF5-5239E7AD-411FE4C4-F6210DEE-BA2473D2";
     }
 
-    private String getHTML(String urlToRead) {
-        System.out.println(urlToRead);
+    private String getHTML(String urlToRead) throws UnsupportedEncodingException {
         URL url;
         HttpURLConnection conn;
         BufferedReader rd;
@@ -89,11 +87,16 @@ public class PolygonGrabber {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(result);
         return result;
     }
 
-    public void downloadWm() {
+    private String toUtf8(String urlToRead) throws UnsupportedEncodingException {
+        byte[] bytes = urlToRead.getBytes(Charset.defaultCharset());
+        urlToRead = new String(bytes, "UTF8");
+        return urlToRead;
+    }
+
+    public void downloadWm() throws UnsupportedEncodingException {
         Gson gson = new Gson();
         wm = gson.fromJson(getHTML(getUrl()), Wm.class);
     }

@@ -1,12 +1,12 @@
 package org.noip.wizzardo.coords;
 
+import org.noip.wizzardo.grabber.tags.Polygon;
+
 /**
  * Created by Б on 17.01.2015.
  */
-public class MountOfOlives extends Point {
+public class MountOfOlives extends Place {
     public MountOfOlives() {
-        latitude = 31.779123;
-        longitude = 35.247735;
-        title = "Mount of Olives";
+        super(null, new Polygon(31.779123, 35.247735), "Mount of Olives");
     }
 }
