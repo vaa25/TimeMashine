@@ -27,14 +27,6 @@ public class Place {
                 '}';
     }
 
-    public List<Polygon> getPolygons() {
-        return polygons;
-    }
-
-    public Polygon getCenter() {
-        return center;
-    }
-
     public String getTitle() {
         return title;
     }

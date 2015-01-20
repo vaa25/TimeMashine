@@ -3,24 +3,26 @@ package org.noip.wizzardo.grabber;
 import org.noip.wizzardo.grabber.tags.Place;
 import org.noip.wizzardo.grabber.tags.Wm;
 
-import java.util.List;
-
 /**
  * Created by Б on 18.01.2015.
  */
-public class WmObjectBuilder {
+public class WmObjectGenerator {
     private String placeTitle;
+    private Wm wm;
 
-    public org.noip.wizzardo.coords.Place getPlace(Wm wm) throws IllegalArgumentException {
-        Place place = selectPlace(wm);
-        return new org.noip.wizzardo.coords.Place(place.getPolygons(), place.getLocationCenter(), placeTitle);
+    public WmObjectGenerator(Wm wm) {
+        this.wm = wm;
     }
 
-    private Place selectPlace(Wm wm) throws IllegalArgumentException {
-        List<Place> places = wm.getPlaces();
+    public org.noip.wizzardo.coords.Place getPlace() throws IllegalArgumentException {
+        Place place = selectPlace();
+        return new org.noip.wizzardo.coords.Place(place.getPolygons(), place.getLocationCenter(), place.getTitle());
+    }
+
+    private Place selectPlace() throws IllegalArgumentException {
         Place result = null;
         boolean foundOne = false;
-        for (Place place : places) {
+        for (Place place : wm.getPlaces()) {
             if (checkPlaceTitle(place)) {
                 if (foundOne) {
                     throw new IllegalArgumentException("Not unique placeTitle '" + placeTitle + '\'');

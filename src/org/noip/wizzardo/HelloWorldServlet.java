@@ -3,15 +3,13 @@ package org.noip.wizzardo;
 import com.google.gson.Gson;
 import org.noip.wizzardo.coords.Place;
 import org.noip.wizzardo.grabber.WmDownloader;
-import org.noip.wizzardo.grabber.WmObjectBuilder;
-import org.noip.wizzardo.grabber.tags.Wm;
+import org.noip.wizzardo.grabber.WmObjectGenerator;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.nio.file.NoSuchFileException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +26,7 @@ public class HelloWorldServlet extends HttpServlet {
         addPlace("Garden of Gethsemane", "en");
         addPlace("Mount Zion", "en");
         changeTitle("Garden of Gethsemane", "Гефсиманский сад");
+        changeTitle("Mount Zion", "Гора Сион");
         req.setAttribute("places", gson.toJson(places));
         getServletContext().getRequestDispatcher("/map.jsp").forward(req, resp);
     }
@@ -57,14 +56,13 @@ public class HelloWorldServlet extends HttpServlet {
     }
 
     private Place downloadPlace(String title, String language) {
+        WmDownloader grabber = new WmDownloader(title);
+        grabber.setLanguage(language);
+        WmObjectGenerator generator = new WmObjectGenerator(grabber.downloadWm());
+        generator.setPlaceTitle(title);
         try {
-            WmDownloader grabber = new WmDownloader(title);
-            grabber.setLanguage(language);
-            Wm wm = grabber.downloadWm();
-            WmObjectBuilder builder = new WmObjectBuilder();
-            builder.setPlaceTitle(title);
-            return (builder.getPlace(wm));
-        } catch (IllegalArgumentException | NoSuchFileException e) {
+            return (generator.getPlace());
+        } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
         return null;
