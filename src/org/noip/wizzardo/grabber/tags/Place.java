@@ -1,6 +1,6 @@
 package org.noip.wizzardo.grabber.tags;
 
-import org.noip.wizzardo.grabber.Util;
+import org.noip.wizzardo.grabber.utils.Util;
 
 import java.util.List;
 

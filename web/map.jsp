@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -17,24 +18,35 @@
     <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/maplabel/src/maplabel-compiled.js"></script>
     <script type="text/javascript">
         function initialize() {
-            var yerusalem =${yerusalem};
-            var olives =${olives};
+            var places =${places};
             var mapOptions = {
                 zoom: 15,
-                center: getLatLng(yerusalem.center),
+                center: getLatLng(places[0].center),
                 mapTypeId: google.maps.MapTypeId.SATELLITE
             };
             var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+            var markers = getMarkers(places);
+            var polygons = getPolygons(places);
 
-            var markers = [];
-            markers[markers.length] = getMarker(yerusalem);
-            markers[markers.length] = getMarker(olives);
+            function getMarkers(places) {
+                var markers = [];
+                for (var index in places) {
+                    if (places.hasOwnProperty(index)) {
+                        markers[markers.length] = getMarker(places[index]);
+                    }
+                }
+            }
 
-            var polygons = [];
-            polygons[polygons.length] = getPolygons(yerusalem);
-            polygons[polygons.length] = getPolygons(olives);
+            function getPolygons(places) {
+                var polygons = [];
+                for (var index in places) {
+                    if (places.hasOwnProperty(index)) {
+                        places[polygons.length] = getPolygon(places[index]);
+                    }
+                }
+            }
 
-            function getPolygons(place) {
+            function getPolygon(place) {
                 return new google.maps.Polygon({
                     path: getLatLons(place.polygons),
                     strokeColor: "#FF0000",
@@ -74,7 +86,7 @@
                     text: place.title,
                     position: getLatLng(place.center),
                     map: map,
-                    fontSize: 35,
+                    fontSize: 16,
                     align: 'right'
                 });
             }

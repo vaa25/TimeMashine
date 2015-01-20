@@ -21,7 +21,7 @@ public class Place {
     @Override
     public String toString() {
         return "Place{" +
-                "polygons=" + org.noip.wizzardo.grabber.Util.toString(polygons) +
+                "polygons=" + org.noip.wizzardo.grabber.utils.Util.toString(polygons) +
                 ", \ncenter=" + center +
                 ", \ntitle='" + title + '\'' +
                 '}';
@@ -37,5 +37,9 @@ public class Place {
 
     public String getTitle() {
         return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

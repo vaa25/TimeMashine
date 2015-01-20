@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import org.noip.wizzardo.coords.Place;
 import org.noip.wizzardo.grabber.tags.Wm;
 
-import java.io.UnsupportedEncodingException;
+import java.nio.file.NoSuchFileException;
 
 /**
  * Created by Б on 19.01.2015.
@@ -22,7 +22,7 @@ public class Tester {
             WmDownloader grabber = new WmDownloader(title);
             grabber.setLanguage("ru");
             Wm wm = grabber.downloadWm();
-            QueryBuilder builder = new QueryBuilder();
+            WmObjectBuilder builder = new WmObjectBuilder();
             builder.setPlaceTitle(title);
             Place place = builder.getPlace(wm);
             System.out.println(place);
@@ -30,7 +30,7 @@ public class Tester {
             System.out.println(gson.toJson(place));
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
+        } catch (NoSuchFileException e) {
             e.printStackTrace();
         }
     }

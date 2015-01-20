@@ -1,7 +1,6 @@
 package org.noip.wizzardo.grabber;
 
 import org.noip.wizzardo.grabber.tags.Place;
-import org.noip.wizzardo.grabber.tags.Polygon;
 import org.noip.wizzardo.grabber.tags.Wm;
 
 import java.util.List;
@@ -9,28 +8,12 @@ import java.util.List;
 /**
  * Created by Б on 18.01.2015.
  */
-public class QueryBuilder {
+public class WmObjectBuilder {
     private String placeTitle;
 
     public org.noip.wizzardo.coords.Place getPlace(Wm wm) throws IllegalArgumentException {
         Place place = selectPlace(wm);
-        String title = placeTitle;
-//        try {
-//            title= URLEncoder.encode(placeTitle, "UTF-8");
-//        } catch (UnsupportedEncodingException e) {
-//            e.printStackTrace();
-//        }
-//        System.out.println(place.getTitle());
-//        System.out.println(place);
-        return new org.noip.wizzardo.coords.Place(place.getPolygons(), place.getLocationCenter(), title);
-    }
-
-    public List<Polygon> getPolygons(Wm wm) throws IllegalArgumentException {
-        return selectPlace(wm).getPolygons();
-    }
-
-    public Polygon getLocationCenter(Wm wm) throws IllegalArgumentException {
-        return selectPlace(wm).getLocationCenter();
+        return new org.noip.wizzardo.coords.Place(place.getPolygons(), place.getLocationCenter(), placeTitle);
     }
 
     private Place selectPlace(Wm wm) throws IllegalArgumentException {
