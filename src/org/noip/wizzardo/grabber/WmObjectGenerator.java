@@ -14,35 +14,72 @@ public class WmObjectGenerator {
         this.wm = wm;
     }
 
-    public org.noip.wizzardo.coords.Place getPlace() throws IllegalArgumentException {
+    public org.noip.wizzardo.objects.Place getPlace() throws IllegalArgumentException {
         Place place = selectPlace();
-        return new org.noip.wizzardo.coords.Place(place.getPolygons(), place.getLocationCenter(), place.getTitle());
+        return new org.noip.wizzardo.objects.Place(place.getPolygons(), place.getLocationCenter(), place.getTitle());
     }
 
     private Place selectPlace() throws IllegalArgumentException {
-        Place result = null;
-        boolean foundOne = false;
-        for (Place place : wm.getPlaces()) {
-            if (checkPlaceTitle(place)) {
-                if (foundOne) {
-                    throw new IllegalArgumentException("Not unique placeTitle '" + placeTitle + '\'');
-                }
-                result = place;
-                foundOne = true;
-            }
-        }
-        if (!foundOne) {
-            throw new IllegalArgumentException("No one placeTitle equals '" + placeTitle + '\'');
-        }
-        return result;
+        checkWmValidity();
+        return new PlaceSelector().invoke().getResult();
     }
 
-    private boolean checkPlaceTitle(Place place) {
-        return !"".equals(placeTitle) && placeTitle.equals(place.getTitle());
+    private void checkWmValidity() {
+        if (wm == null) {
+            throw new IllegalArgumentException("Wm is null");
+        } else if (!wm.isAvailable()) {
+            throw new IllegalArgumentException(wm.getMessage());
+        }
     }
 
     public void setPlaceTitle(String placeTitle) {
         this.placeTitle = placeTitle;
     }
 
+    private class PlaceSelector {
+        private Place result;
+        private boolean foundOne;
+
+        public Place getResult() {
+            return result;
+        }
+
+        public PlaceSelector invoke() {
+            result = null;
+            foundOne = false;
+            selectPlace();
+            checkResult();
+            return this;
+        }
+
+        private void selectPlace() {
+            for (Place place : wm.getPlaces()) {
+                checkPlaceEligible(place);
+            }
+        }
+
+        private void checkPlaceEligible(Place place) {
+            if (checkPlaceTitle(place)) {
+                checkUnique();
+                result = place;
+                foundOne = true;
+            }
+        }
+
+        private void checkUnique() {
+            if (foundOne) {
+                throw new IllegalArgumentException("Not unique placeTitle '" + placeTitle + '\'');
+            }
+        }
+
+        private void checkResult() {
+            if (!foundOne) {
+                throw new IllegalArgumentException("No one placeTitle equals '" + placeTitle + '\'');
+            }
+        }
+
+        private boolean checkPlaceTitle(Place place) {
+            return !"".equals(placeTitle) && placeTitle.equals(place.getTitle());
+        }
+    }
 }

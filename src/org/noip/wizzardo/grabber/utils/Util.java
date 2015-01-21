@@ -41,7 +41,6 @@ public class Util {
 
     public static String download(String urlToRead) {
         StringBuilder result = new StringBuilder();
-
         try {
             URL url = new URL(urlToRead);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();

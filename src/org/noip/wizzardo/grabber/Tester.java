@@ -1,7 +1,7 @@
 package org.noip.wizzardo.grabber;
 
 import com.google.gson.Gson;
-import org.noip.wizzardo.coords.Place;
+import org.noip.wizzardo.objects.Place;
 
 /**
  * Created by Б on 19.01.2015.

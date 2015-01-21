@@ -1,38 +1,33 @@
 package org.noip.wizzardo.coords;
 
+import org.noip.wizzardo.grabber.tags.Polygon;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Б on 16.01.2015.
  */
 public class Util {
-    /**
-     * Преобразование координат в градусах/минутах/секундах в координаты десятичных градусов
-     *
-     * @param value "31°46'4404"
-     * @return 31.7789
-     */
-    public static double toWgc(String value) {
-        String[] splitted = value.split("[°'\"]");
-        double result = Double.parseDouble(splitted[0]) +
-                Double.parseDouble(splitted[1]) / 60;
-        double seconds = Double.parseDouble(splitted[2]) / 60 / 60;
-        while (seconds >= (1.0 / 60)) {
-            seconds /= 10;
+    public static List<Polygon> getCircle(Polygon center, double radius, int count) {
+        double step = Math.PI * 2 / count;
+        List<Polygon> result = new ArrayList<>(count);
+        double angle = 0;
+        for (int i = 0; i < count; i++) {
+            Polygon polygon = new Polygon(center.getX() + Math.sin(angle) * radius, center.getY() + Math.cos(angle) * radius);
+            result.add(polygon);
+            angle += step;
         }
-        result += seconds;
         return result;
     }
 
-    /**
-     * Преобразование координат десятичных градусов в координаты в градусах/минутах/секундах
-     *
-     * @param value 31.7789
-     * @return 31°46'44"
-     */
-    public static String fromWgc(double value) {
-        double degrees = value % 1;
-        int integer = (int) value;
-        int minutes = (int) (degrees * 60);
-        int seconds = (int) ((degrees * 60 - minutes) * 60);
-        return Integer.toString(integer) + '°' + minutes + '\'' + seconds + '\"';
+    public static Polygon getCenter(List<Polygon> polygons) {
+        double x = 0;
+        double y = 0;
+        for (Polygon polygon : polygons) {
+            x += polygon.getX();
+            y += polygon.getY();
+        }
+        return new Polygon(x / polygons.size(), y / polygons.size());
     }
 }

@@ -31,18 +31,6 @@ public class WmDownloader {
 
     }
 
-    public WmDownloader(double latitude, double longitude, double distance) {
-        this(latitude, longitude, distance, "");
-    }
-
-    public WmDownloader(double latitude, double longitude, String name) {
-        this(latitude, longitude, 0, name);
-    }
-
-    public WmDownloader(double latitude, double longitude) {
-        this(latitude, longitude, 100, "");
-    }
-
     private String getUrl() {
         return new WmPlaceSearchUrlBuilder()
                 .setQuery(name)

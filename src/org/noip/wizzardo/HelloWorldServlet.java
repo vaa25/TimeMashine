@@ -1,9 +1,12 @@
 package org.noip.wizzardo;
 
 import com.google.gson.Gson;
-import org.noip.wizzardo.coords.Place;
+import org.noip.wizzardo.coords.Babylon;
+import org.noip.wizzardo.coords.Edem;
+import org.noip.wizzardo.coords.Edem2;
 import org.noip.wizzardo.grabber.WmDownloader;
 import org.noip.wizzardo.grabber.WmObjectGenerator;
+import org.noip.wizzardo.objects.Place;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,6 +24,9 @@ public class HelloWorldServlet extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Gson gson = new Gson();
         places = new ArrayList<>();
+        places.add(new Babylon());
+        places.add(new Edem2());
+        places.add(new Edem());
         addPlace("Город Давида", "ru");
         addPlace("Масличная гора", "ru");
         addPlace("Garden of Gethsemane", "en");

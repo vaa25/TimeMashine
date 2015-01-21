@@ -1,4 +1,4 @@
-package org.noip.wizzardo.coords;
+package org.noip.wizzardo.objects;
 
 import org.noip.wizzardo.grabber.tags.Polygon;
 
@@ -8,8 +8,8 @@ import java.util.List;
  * Created by Б on 19.01.2015.
  */
 public class Place {
-    private List<Polygon> polygons;
-    private Polygon center;
+    protected List<Polygon> polygons;
+    protected Polygon center;
     private String title;
 
     public Place(List<Polygon> polygons, Polygon center, String title) {
