@@ -38,6 +38,7 @@ public class WmDownloader {
                 .setLon(longitude)
                 .setLanguage(language)
                 .setDistance(distance)
+                .setKey(getMyKey())
                 .build();
     }
 
@@ -46,20 +47,20 @@ public class WmDownloader {
     }
 
     public Wm downloadWm() {
-        Path jsonFileName = new File(name + ".json").toPath();
-        String jsonFile = getJson(jsonFileName);
+        Path jsonFilePath = new File(name + ".json").toPath();
+        String jsonData = getJson(jsonFilePath);
         Gson gson = new Gson();
-        Wm newWm = gson.fromJson(jsonFile, Wm.class);
-        if (Files.notExists(jsonFileName) && newWm != null && newWm.isAvailable()) {
-            Util.save(jsonFileName, jsonFile);
+        Wm newWm = gson.fromJson(jsonData, Wm.class);
+        if (Files.notExists(jsonFilePath) && newWm != null && newWm.isAvailable()) {
+            Util.save(jsonFilePath, jsonData);
         }
         return newWm;
     }
 
-    private String getJson(Path jsonFileName) {
-        if (Files.exists(jsonFileName)) {
+    private String getJson(Path jsonFilePath) {
+        if (Files.exists(jsonFilePath)) {
             try {
-                return Util.load(jsonFileName);
+                return Util.load(jsonFilePath);
             } catch (IOException e) {
                 e.printStackTrace();
             }
