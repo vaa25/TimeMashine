@@ -143,21 +143,11 @@ public class WmPlaceSearchUrlBuilder {
     }
 
     public WmPlaceSearchUrlBuilder setDistance(int distance) {
-        if (distance > 0) {
-            this.distance = String.valueOf(distance);
-        } else {
-            this.distance = "";
-        }
-        return this;
+        return setDistance((distance > 0) ? String.valueOf(distance) : "");
     }
 
     public WmPlaceSearchUrlBuilder setDistance(double distance) {
-        if (distance > 0) {
-            this.distance = String.valueOf(distance);
-        } else {
-            this.distance = "";
-        }
-        return this;
+        return setDistance((distance > 0) ? String.valueOf(distance) : "");
     }
 
     public String build() {

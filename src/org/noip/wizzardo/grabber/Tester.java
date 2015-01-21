@@ -6,7 +6,7 @@ import org.noip.wizzardo.objects.Place;
 import java.util.List;
 
 /**
- * Created by Б on 19.01.2015.
+ * Created by Б on 21.01.2015.
  */
 public class Tester {
     public static void main(String[] args) {
