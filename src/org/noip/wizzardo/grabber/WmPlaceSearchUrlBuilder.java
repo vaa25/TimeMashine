@@ -9,21 +9,21 @@ import java.net.URLEncoder;
  * Created by Б on 20.01.2015.
  */
 public class WmPlaceSearchUrlBuilder {
-    private String address;
-    private String key;
-    private String function;
-    private String q;
-    private String lat;
-    private String lon;
-    private String format;
-    private String pack;
-    private String language;
-    private String page;
-    private String count;
-    private String category;
-    private String categories_or;
-    private String categories_and;
-    private String distance;
+    private String address = "";
+    private String key = "";
+    private String function = "";
+    private String q = "";
+    private String lat = "";
+    private String lon = "";
+    private String format = "";
+    private String pack = "";
+    private String language = "";
+    private String page = "";
+    private String count = "";
+    private String category = "";
+    private String categories_or = "";
+    private String categories_and = "";
+    private String distance = "";
 
 
     public WmPlaceSearchUrlBuilder() {
@@ -143,18 +143,26 @@ public class WmPlaceSearchUrlBuilder {
     }
 
     public WmPlaceSearchUrlBuilder setDistance(int distance) {
-        this.distance = String.valueOf(distance);
+        if (distance > 0) {
+            this.distance = String.valueOf(distance);
+        } else {
+            this.distance = "";
+        }
         return this;
     }
 
     public WmPlaceSearchUrlBuilder setDistance(double distance) {
-        this.distance = String.valueOf(distance);
+        if (distance > 0) {
+            this.distance = String.valueOf(distance);
+        } else {
+            this.distance = "";
+        }
         return this;
     }
 
     public String build() {
         return new StringBuilder().append(address)
-                .append("&key=").append(key)
+                .append("?key=").append(key)
                 .append("&function=").append(function)
                 .append("&q=").append(q)
                 .append("&lat=").append(lat)

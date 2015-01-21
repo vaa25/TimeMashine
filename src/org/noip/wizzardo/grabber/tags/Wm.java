@@ -14,7 +14,6 @@ public class Wm {
     private int page;
     private int count;
     private Debug debug;
-    private String message;
 
     @Override
     public String toString() {
@@ -35,7 +34,7 @@ public class Wm {
         return places;
     }
 
-    public String getMessage() {
-        return message;
+    public String getDebug() {
+        return debug.getMessage();
     }
 }

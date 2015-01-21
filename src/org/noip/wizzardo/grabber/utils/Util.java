@@ -40,6 +40,7 @@ public class Util {
     }
 
     public static String download(String urlToRead) {
+        System.out.println(urlToRead);
         StringBuilder result = new StringBuilder();
         try {
             URL url = new URL(urlToRead);

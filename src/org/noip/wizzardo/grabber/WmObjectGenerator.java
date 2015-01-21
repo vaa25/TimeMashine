@@ -28,7 +28,7 @@ public class WmObjectGenerator {
         if (wm == null) {
             throw new IllegalArgumentException("Wm is null");
         } else if (!wm.isAvailable()) {
-            throw new IllegalArgumentException(wm.getMessage());
+            throw new IllegalArgumentException(wm.getDebug());
         }
     }
 
