@@ -4,11 +4,6 @@ import com.google.gson.Gson;
 import org.noip.wizzardo.grabber.tags.Wm;
 import org.noip.wizzardo.grabber.utils.Util;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-
 /**
  * Created by Б on 18.01.2015.
  */
@@ -47,25 +42,7 @@ public class WmDownloader {
     }
 
     public Wm downloadWm() {
-        Path jsonFilePath = new File(name + ".json").toPath();
-        String jsonData = getJson(jsonFilePath);
-        Gson gson = new Gson();
-        Wm newWm = gson.fromJson(jsonData, Wm.class);
-        if (Files.notExists(jsonFilePath) && newWm != null && newWm.isAvailable()) {
-            Util.save(jsonFilePath, jsonData);
-        }
-        return newWm;
-    }
-
-    private String getJson(Path jsonFilePath) {
-        if (Files.exists(jsonFilePath)) {
-            try {
-                return Util.load(jsonFilePath);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return Util.download(getUrl());
+        return new Gson().fromJson(Util.download(getUrl()), Wm.class);
     }
 
     public void setLanguage(String language) {

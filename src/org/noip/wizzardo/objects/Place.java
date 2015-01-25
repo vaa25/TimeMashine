@@ -42,4 +42,24 @@ public class Place {
     public List<Polygon> getBound() {
         return bound;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Place place = (Place) o;
+
+        if (!center.equals(place.center)) return false;
+        if (!title.equals(place.title)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = center.hashCode();
+        result = 31 * result + title.hashCode();
+        return result;
+    }
 }
