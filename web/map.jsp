@@ -26,7 +26,7 @@
             };
             var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
             var markers = getMarkers(places);
-            var polygons = getPolygons(places);
+            var bound = getPolygons(places);
 
             function getMarkers(places) {
                 var markers = [];
@@ -38,17 +38,17 @@
             }
 
             function getPolygons(places) {
-                var polygons = [];
+                var bound = [];
                 for (var index in places) {
                     if (places.hasOwnProperty(index)) {
-                        places[polygons.length] = getPolygon(places[index]);
+                        places[bound.length] = getPolygon(places[index]);
                     }
                 }
             }
 
             function getPolygon(place) {
                 return new google.maps.Polygon({
-                    path: getLatLons(place.polygons),
+                    path: getLatLons(place.bound),
                     strokeColor: "#FF0000",
                     strokeOpacity: 0.8,
                     strokeWeight: 2,

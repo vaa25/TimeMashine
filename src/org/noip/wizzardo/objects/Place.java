@@ -8,12 +8,12 @@ import java.util.List;
  * Created by Б on 19.01.2015.
  */
 public class Place {
-    protected List<Polygon> polygons;
+    protected List<Polygon> bound;
     protected Polygon center;
     private String title;
 
-    public Place(List<Polygon> polygons, Polygon center, String title) {
-        this.polygons = polygons;
+    public Place(List<Polygon> bound, Polygon center, String title) {
+        this.bound = bound;
         this.center = center;
         this.title = title;
     }
@@ -21,7 +21,7 @@ public class Place {
     @Override
     public String toString() {
         return "Place{" +
-                "polygons=" + org.noip.wizzardo.grabber.utils.Util.toString(polygons) +
+                "polygons=" + org.noip.wizzardo.grabber.utils.Util.toString(bound) +
                 ", \ncenter=" + center +
                 ", \ntitle='" + title + '\'' +
                 '}';
@@ -33,5 +33,13 @@ public class Place {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Polygon getCenter() {
+        return center;
+    }
+
+    public List<Polygon> getBound() {
+        return bound;
     }
 }

@@ -11,9 +11,9 @@ import java.util.ArrayList;
 public class Babylon extends Place {
     public Babylon() {
         super(new ArrayList<Polygon>(3), null, "Вавилон");
-        polygons.add(new Polygon(44.416902, 32.543229));
-        polygons.add(new Polygon(44.444338, 32.540380));
-        polygons.add(new Polygon(44.426806, 32.522259));
-        center = Util.getCenter(polygons);
+        bound.add(new Polygon(44.416902, 32.543229));
+        bound.add(new Polygon(44.444338, 32.540380));
+        bound.add(new Polygon(44.426806, 32.522259));
+        center = Util.getCenter(bound);
     }
 }
