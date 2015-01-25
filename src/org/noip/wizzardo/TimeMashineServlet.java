@@ -11,7 +11,7 @@ import java.io.IOException;
 /**
  * Created by Б on 07.01.2015.
  */
-public class HelloWorldServlet extends HttpServlet {
+public class TimeMashineServlet extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Gson gson = new Gson();
         req.setAttribute("places", gson.toJson(new Preparer().getPlaces()));

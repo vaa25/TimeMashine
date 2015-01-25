@@ -5,7 +5,7 @@
          version="3.1">
     <servlet>
         <servlet-name>HelloServlet</servlet-name>
-        <servlet-class>org.noip.wizzardo.HelloWorldServlet</servlet-class>
+        <servlet-class>org.noip.wizzardo.TimeMashineServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HelloServlet</servlet-name>
