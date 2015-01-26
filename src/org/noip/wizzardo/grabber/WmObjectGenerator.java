@@ -7,7 +7,7 @@ import org.noip.wizzardo.grabber.tags.Wm;
  * Created by Б on 18.01.2015.
  */
 public class WmObjectGenerator {
-    private String placeTitle;
+    private String placeTitle = "";
     private Wm wm;
 
     public WmObjectGenerator(Wm wm) {
@@ -15,8 +15,13 @@ public class WmObjectGenerator {
     }
 
     public org.noip.wizzardo.objects.Place getPlace() throws IllegalArgumentException {
-        Place place = selectPlace();
-        return new org.noip.wizzardo.objects.Place(place.getPolygons(), place.getLocationCenter(), place.getTitle());
+        try {
+            Place place = selectPlace();
+            return new org.noip.wizzardo.objects.Place(place.getPolygons(), place.getLocationCenter(), place.getTitle());
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     private Place selectPlace() throws IllegalArgumentException {

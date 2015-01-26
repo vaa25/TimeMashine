@@ -15,6 +15,9 @@ import java.util.List;
  */
 public class Util {
     public static String toString(List list) {
+        if (list == null) {
+            return "absent";
+        }
         StringBuilder result = new StringBuilder("List has ").append(list.size()).append(" elements\n");
         for (Object elem : list) {
             result.append('\t').append(elem.toString()).append('\n');
@@ -40,11 +43,9 @@ public class Util {
     }
 
     public static String download(String urlToRead) {
-        System.out.println(urlToRead);
         StringBuilder result = new StringBuilder();
         try {
-            URL url = new URL(urlToRead);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            HttpURLConnection conn = (HttpURLConnection) new URL(urlToRead).openConnection();
             conn.setRequestMethod("GET");
             BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String line;
@@ -55,6 +56,7 @@ public class Util {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println(result.toString());
         return result.toString();
     }
 }

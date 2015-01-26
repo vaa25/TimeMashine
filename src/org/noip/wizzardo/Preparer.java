@@ -57,11 +57,6 @@ public class Preparer {
         grabber.setLanguage(language);
         WmObjectGenerator generator = new WmObjectGenerator(grabber.downloadWm());
         generator.setPlaceTitle(title);
-        try {
-            return (generator.getPlace());
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        }
-        return null;
+        return generator.getPlace();
     }
 }

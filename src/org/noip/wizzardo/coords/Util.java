@@ -10,13 +10,9 @@ import java.util.List;
  */
 public class Util {
     public static List<Polygon> getCircle(Polygon center, double radius, int count) {
-        double step = Math.PI * 2 / count;
         List<Polygon> result = new ArrayList<>(count);
-        double angle = 0;
-        for (int i = 0; i < count; i++) {
-            Polygon polygon = new Polygon(center.getX() + Math.sin(angle) * radius, center.getY() + Math.cos(angle) * radius);
-            result.add(polygon);
-            angle += step;
+        for (double angle = 0; angle < Math.PI * 2; angle += Math.PI * 2 / count) {
+            result.add(new Polygon(center.getX() + Math.sin(angle) * radius, center.getY() + Math.cos(angle) * radius));
         }
         return result;
     }

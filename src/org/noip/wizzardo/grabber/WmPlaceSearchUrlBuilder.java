@@ -45,7 +45,9 @@ public class WmPlaceSearchUrlBuilder {
     }
 
     public WmPlaceSearchUrlBuilder setLat(String lat) {
-        this.lat = lat;
+        if (isDouble(lat)) {
+            this.lat = lat;
+        }
         return this;
     }
 
@@ -60,8 +62,19 @@ public class WmPlaceSearchUrlBuilder {
     }
 
     public WmPlaceSearchUrlBuilder setLon(String lon) {
-        this.lon = lon;
+        if (isDouble(lon)) {
+            this.lon = lon;
+        }
         return this;
+    }
+
+    private boolean isDouble(String lon) {
+        try {
+            Double.valueOf(lon);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     public WmPlaceSearchUrlBuilder setLon(double lon) {
@@ -83,57 +96,8 @@ public class WmPlaceSearchUrlBuilder {
         return this;
     }
 
-    public WmPlaceSearchUrlBuilder setFormat(String format) {
-        if ("xml".equals(format) || "json".equals(format)) {
-            this.format = format;
-        }
-        return this;
-    }
-
-    public WmPlaceSearchUrlBuilder setPack(String pack) {
-        if ("gzip".equals(pack) || "none".equals(pack) || "".equals(pack)) {
-            this.pack = pack;
-        }
-        return this;
-    }
-
     public WmPlaceSearchUrlBuilder setLanguage(String language) {
         this.language = language;
-        return this;
-    }
-
-    public WmPlaceSearchUrlBuilder setPage(String page) {
-        this.page = page;
-        return this;
-    }
-
-    public WmPlaceSearchUrlBuilder setPage(int page) {
-        this.page = String.valueOf(page);
-        return this;
-    }
-
-    public WmPlaceSearchUrlBuilder setCount(String count) {
-        this.count = count;
-        return this;
-    }
-
-    public WmPlaceSearchUrlBuilder setCount(int count) {
-        this.count = String.valueOf(count);
-        return this;
-    }
-
-    public WmPlaceSearchUrlBuilder setCategory(String category) {
-        this.category = category;
-        return this;
-    }
-
-    public WmPlaceSearchUrlBuilder setCategories_or(String categories_or) {
-        this.categories_or = categories_or;
-        return this;
-    }
-
-    public WmPlaceSearchUrlBuilder setCategories_and(String categories_and) {
-        this.categories_and = categories_and;
         return this;
     }
 

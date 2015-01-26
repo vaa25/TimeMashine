@@ -152,7 +152,6 @@ public class Crud {
                 "x DOUBLE PRECISION NOT NULL," +
                 "y DOUBLE PRECISION NOT NULL)";
         String queryCreateBounds = "CREATE TABLE IF NOT EXISTS bounds (" +
-//                "id SERIAL NOT NULL UNIQUE PRIMARY KEY," +
                 "place_id INTEGER NOT NULL ," +
                 "polygon_id INTEGER NOT NULL)";
 
