@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>org.noip.wizzardo.TimeMashineServlet</OriginalElement>
+  <nodes>
+    <node x="147.35982142857142" y="-2.0">org.noip.wizzardo.coords.Util</node>
+    <node x="-74.5" y="-2.0">org.noip.wizzardo.grabber.tags.Comment</node>
+    <node x="-428.5" y="-2.0">org.noip.wizzardo.grabber.tags.Photo</node>
+    <node x="-255.5" y="87.0">org.noip.wizzardo.grabber.tags.Place</node>
+    <node x="367.0820436507936" y="254.0">org.noip.wizzardo.grabber.WmDownloader</node>
+    <node x="-200.375" y="255.0">org.noip.wizzardo.grabber.WmObjectGenerator</node>
+    <node x="76.22222222222217" y="433.0">org.noip.wizzardo.TimeMashineServlet</node>
+    <node x="341.5820436507936" y="165.0">org.noip.wizzardo.grabber.WmPlaceSearchUrlBuilder</node>
+    <node x="-192.125" y="166.0">org.noip.wizzardo.grabber.tags.Wm</node>
+    <node x="16.88759920634925" y="255.0">org.noip.wizzardo.db.Crud</node>
+    <node x="-156.875" y="87.0">org.noip.wizzardo.grabber.tags.Debug</node>
+    <node x="189.0820436507936" y="255.0">org.noip.wizzardo.coords.Edem</node>
+    <node x="142.35982142857142" y="166.0">org.noip.wizzardo.objects.Place</node>
+    <node x="271.0820436507936" y="255.0">org.noip.wizzardo.coords.Babylon</node>
+    <node x="94.88759920634925" y="255.0">org.noip.wizzardo.coords.Edem2</node>
+    <node x="120.72916666666663" y="-111.0">org.noip.wizzardo.grabber.tags.Polygon</node>
+    <node x="-251.5" y="-2.0">org.noip.wizzardo.grabber.tags.Tag</node>
+    <node x="-344.5" y="-2.0">org.noip.wizzardo.grabber.tags.EditInfo</node>
+    <node x="-539.0" y="-111.0">org.noip.wizzardo.grabber.tags.Gadm</node>
+    <node x="-526.5" y="-2.0">org.noip.wizzardo.grabber.tags.Location</node>
+    <node x="408.0" y="61.0">org.noip.wizzardo.grabber.utils.Util</node>
+    <node x="-179.5" y="-2.0">org.noip.wizzardo.grabber.tags.Language</node>
+    <node x="107.72222222222217" y="354.0">org.noip.wizzardo.Preparer</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="org.noip.wizzardo.TimeMashineServlet" target="org.noip.wizzardo.Preparer">
+      <point x="0.0" y="-14.5" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="org.noip.wizzardo.grabber.WmObjectGenerator" target="org.noip.wizzardo.grabber.tags.Wm">
+      <point x="-35.25" y="-14.5" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="org.noip.wizzardo.grabber.WmObjectGenerator" target="org.noip.wizzardo.objects.Place">
+      <point x="35.25" y="-14.5" />
+      <point x="-94.625" y="215.0" />
+      <point x="147.35982142857142" y="215.0" />
+      <point x="-25.0" y="14.5" />
+    </edge>
+    <edge source="org.noip.wizzardo.Preparer" target="org.noip.wizzardo.coords.Babylon">
+      <point x="23.75" y="-14.5" />
+      <point x="169.47222222222217" y="324.0" />
+      <point x="308.5820436507936" y="324.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="org.noip.wizzardo.grabber.WmDownloader" target="org.noip.wizzardo.grabber.WmPlaceSearchUrlBuilder">
+      <point x="0.0" y="-14.5" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="org.noip.wizzardo.grabber.tags.Wm" target="org.noip.wizzardo.grabber.tags.Place">
+      <point x="-13.5" y="-14.5" />
+      <point x="-178.625" y="141.0" />
+      <point x="-225.5" y="141.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="org.noip.wizzardo.grabber.tags.Place" target="org.noip.wizzardo.grabber.tags.EditInfo">
+      <point x="-8.571428571428669" y="-14.5" />
+      <point x="-234.07142857142867" y="47.0" />
+      <point x="-308.0" y="47.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="org.noip.wizzardo.Preparer" target="org.noip.wizzardo.grabber.WmDownloader">
+      <point x="33.25" y="-14.5" />
+      <point x="178.97222222222217" y="334.0" />
+      <point x="425.0820436507936" y="335.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="org.noip.wizzardo.coords.Edem" target="org.noip.wizzardo.objects.Place">
+      <point x="-15.5" y="-14.5" />
+      <point x="204.5820436507936" y="235.0" />
+      <point x="187.35982142857142" y="235.0" />
+      <point x="15.0" y="14.5" />
+    </edge>
+    <edge source="org.noip.wizzardo.grabber.tags.Location" target="org.noip.wizzardo.grabber.tags.Gadm">
+      <point x="-19.5" y="-14.5" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="org.noip.wizzardo.db.Crud" target="org.noip.wizzardo.grabber.tags.Polygon">
+      <point x="-14.5" y="-14.5" />
+      <point x="31.38759920634925" y="-42.0" />
+      <point x="141.84027777777771" y="-42.0" />
+      <point x="-16.888888888888914" y="14.5" />
+    </edge>
+    <edge source="org.noip.wizzardo.grabber.tags.Place" target="org.noip.wizzardo.grabber.tags.Location">
+      <point x="-25.714285714285666" y="-14.5" />
+      <point x="-251.21428571428567" y="67.0" />
+      <point x="-487.5" y="67.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="org.noip.wizzardo.Preparer" target="org.noip.wizzardo.db.Crud">
+      <point x="-14.25" y="-14.5" />
+      <point x="131.47222222222217" y="314.0" />
+      <point x="60.38759920634925" y="314.0" />
+      <point x="14.5" y="14.5" />
+    </edge>
+    <edge source="org.noip.wizzardo.coords.Babylon" target="org.noip.wizzardo.grabber.tags.Polygon">
+      <point x="18.75" y="-14.5" />
+      <point x="327.3320436507936" y="-52.0" />
+      <point x="192.50694444444446" y="-52.0" />
+      <point x="33.77777777777783" y="14.5" />
+    </edge>
+    <edge source="org.noip.wizzardo.Preparer" target="org.noip.wizzardo.grabber.WmObjectGenerator">
+      <point x="-33.25" y="-14.5" />
+      <point x="112.47222222222217" y="334.0" />
+      <point x="-129.875" y="334.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="org.noip.wizzardo.coords.Babylon" target="org.noip.wizzardo.objects.Place">
+      <point x="-18.75" y="-14.5" />
+      <point x="289.8320436507936" y="225.0" />
+      <point x="197.35982142857142" y="225.0" />
+      <point x="25.0" y="14.5" />
+    </edge>
+    <edge source="org.noip.wizzardo.objects.Place" target="org.noip.wizzardo.grabber.tags.Polygon">
+      <point x="-15.0" y="-14.5" />
+      <point x="157.35982142857142" y="141.0" />
+      <point x="136.85982142857142" y="141.0" />
+      <point x="136.85982142857142" y="-22.0" />
+      <point x="158.72916666666663" y="-22.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="org.noip.wizzardo.coords.Edem" target="org.noip.wizzardo.grabber.tags.Polygon">
+      <point x="15.5" y="-14.5" />
+      <point x="235.5820436507936" y="-42.0" />
+      <point x="184.0624999999999" y="-42.0" />
+      <point x="25.333333333333258" y="14.5" />
+    </edge>
+    <edge source="org.noip.wizzardo.Preparer" target="org.noip.wizzardo.objects.Place">
+      <point x="4.75" y="-14.5" />
+      <point x="150.47222222222217" y="304.0" />
+      <point x="177.35982142857142" y="304.0" />
+      <point x="5.0" y="14.5" />
+    </edge>
+    <edge source="org.noip.wizzardo.coords.Edem2" target="org.noip.wizzardo.grabber.tags.Polygon">
+      <point x="-17.0" y="-14.5" />
+      <point x="111.88759920634925" y="-32.0" />
+      <point x="150.28472222222229" y="-32.0" />
+      <point x="-8.444444444444343" y="14.5" />
+    </edge>
+    <edge source="org.noip.wizzardo.db.Crud" target="org.noip.wizzardo.objects.Place">
+      <point x="14.5" y="-14.5" />
+      <point x="60.38759920634925" y="225.0" />
+      <point x="157.35982142857142" y="225.0" />
+      <point x="-15.0" y="14.5" />
+    </edge>
+    <edge source="org.noip.wizzardo.Preparer" target="org.noip.wizzardo.coords.Edem2">
+      <point x="-4.75" y="-14.5" />
+      <point x="140.97222222222217" y="304.0" />
+      <point x="128.88759920634925" y="304.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="org.noip.wizzardo.coords.Edem2" target="org.noip.wizzardo.objects.Place">
+      <point x="17.0" y="-14.5" />
+      <point x="145.88759920634925" y="235.0" />
+      <point x="167.35982142857142" y="235.0" />
+      <point x="-5.0" y="14.5" />
+    </edge>
+    <edge source="org.noip.wizzardo.grabber.tags.Place" target="org.noip.wizzardo.grabber.tags.Language">
+      <point x="8.571428571428669" y="-14.5" />
+      <point x="-216.92857142857133" y="47.0" />
+      <point x="-137.5" y="47.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="org.noip.wizzardo.coords.Util" target="org.noip.wizzardo.grabber.tags.Polygon">
+      <point x="0.0" y="-14.5" />
+      <point x="172.35982142857142" y="-22.0" />
+      <point x="167.17361111111097" y="-22.0" />
+      <point x="8.444444444444343" y="14.5" />
+    </edge>
+    <edge source="org.noip.wizzardo.grabber.tags.Wm" target="org.noip.wizzardo.grabber.tags.Debug">
+      <point x="13.5" y="-14.5" />
+      <point x="-151.625" y="141.0" />
+      <point x="-123.375" y="141.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="org.noip.wizzardo.grabber.tags.Location" target="org.noip.wizzardo.grabber.tags.Polygon">
+      <point x="19.5" y="-14.5" />
+      <point x="-468.0" y="-62.0" />
+      <point x="124.9513888888888" y="-62.0" />
+      <point x="-33.77777777777783" y="14.5" />
+    </edge>
+    <edge source="org.noip.wizzardo.grabber.tags.Place" target="org.noip.wizzardo.grabber.tags.Polygon">
+      <point x="17.14285714285711" y="-14.5" />
+      <point x="-208.3571428571429" y="57.0" />
+      <point x="-85.0" y="57.0" />
+      <point x="-85.0" y="-52.0" />
+      <point x="133.39583333333337" y="-52.0" />
+      <point x="-25.333333333333258" y="14.5" />
+    </edge>
+    <edge source="org.noip.wizzardo.grabber.tags.Place" target="org.noip.wizzardo.grabber.tags.Photo">
+      <point x="-17.14285714285711" y="-14.5" />
+      <point x="-242.6428571428571" y="57.0" />
+      <point x="-396.5" y="57.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="org.noip.wizzardo.grabber.tags.Place" target="org.noip.wizzardo.grabber.tags.Comment">
+      <point x="25.71428571428578" y="-14.5" />
+      <point x="-199.78571428571422" y="67.0" />
+      <point x="-31.5" y="67.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="org.noip.wizzardo.grabber.tags.Place" target="org.noip.wizzardo.grabber.tags.Tag">
+      <point x="0.0" y="-14.5" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="org.noip.wizzardo.Preparer" target="org.noip.wizzardo.coords.Edem">
+      <point x="14.25" y="-14.5" />
+      <point x="159.97222222222217" y="314.0" />
+      <point x="220.0820436507936" y="314.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="150.5" y="273.0" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
