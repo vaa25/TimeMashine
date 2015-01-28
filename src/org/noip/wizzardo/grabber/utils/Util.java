@@ -1,13 +1,9 @@
 package org.noip.wizzardo.grabber.utils;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
 
 /**
@@ -25,23 +21,6 @@ public class Util {
         return result.append("End of list").toString();
     }
 
-    public static String load(Path path) throws IOException {
-        StringBuilder result = new StringBuilder();
-        List<String> lines = Files.readAllLines(path, Charset.forName("UTF-8"));
-        for (String line : lines) {
-            result.append(line);
-        }
-        return result.toString();
-    }
-
-    public static void save(Path path, String value) {
-        try {
-            Files.write(path, value.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public static String download(String urlToRead) {
         StringBuilder result = new StringBuilder();
         try {
@@ -56,7 +35,6 @@ public class Util {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(result.toString());
         return result.toString();
     }
 }
