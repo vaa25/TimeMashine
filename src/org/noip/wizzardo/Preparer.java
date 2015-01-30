@@ -3,7 +3,8 @@ package org.noip.wizzardo;
 import org.noip.wizzardo.coords.Babylon;
 import org.noip.wizzardo.coords.Edem;
 import org.noip.wizzardo.coords.Edem2;
-import org.noip.wizzardo.db.Crud;
+import org.noip.wizzardo.db.DataBase;
+import org.noip.wizzardo.db.tables.TbPlace;
 import org.noip.wizzardo.grabber.WmDownloader;
 import org.noip.wizzardo.grabber.WmObjectGenerator;
 import org.noip.wizzardo.objects.Place;
@@ -16,9 +17,9 @@ import java.util.List;
  */
 public class Preparer {
     private List<Place> places;
-    private Crud crud = new Crud();
+    private TbPlace tbPlace;
     public List<Place> getPlaces() {
-
+        tbPlace = new TbPlace(new DataBase().getStatement());
         places = new ArrayList<>();
         addPlace(new Babylon());
         addPlace(new Edem2());
@@ -31,8 +32,8 @@ public class Preparer {
     }
 
     private List<Place> addPlace(Place place) {
-        if (!crud.hasPlace(place.getTitle())) {
-            crud.setPlace(place);
+        if (!tbPlace.hasPlace(place.getTitle())) {
+            tbPlace.create(place);
         }
         places.add(place);
         return places;
@@ -40,11 +41,11 @@ public class Preparer {
 
     private List<Place> addPlace(String title, String language) {
         Place place = null;
-        if (!crud.hasPlace(title)) {
+        if (!tbPlace.hasPlace(title)) {
             place = downloadPlace(title, language);
-            crud.setPlace(place);
+            tbPlace.create(place);
         } else {
-            place = crud.getPlace(title);
+            place = tbPlace.read(title);
         }
         if (place != null) {
             places.add(place);
