@@ -27,17 +27,29 @@ public class DataBase {
     }
 
     private Connection getConnection() throws SQLException {
+        Connection result = getWizzardoConnection();
+        if (result == null) {
+            result = getLocalConnection();
+        }
+        return result;
+    }
+
+    private Connection getWizzardoConnection() {
         Connection result = null;
         try {
             result = DriverManager.getConnection("jdbc:postgresql://localhost:5432/hijack", "hijack", "1234");
             System.out.println("Wizzardo postgresql activated");
         } catch (SQLException e) {
-            try {
-                result = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "1234");
-                System.out.println("localhost postgresql activated");
-            } catch (SQLException e1) {
-                throw e;
-            }
+        }
+        return result;
+    }
+
+    private Connection getLocalConnection() throws SQLException {
+        Connection result = null;
+        try {
+            result = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "1234");
+            System.out.println("localhost postgresql activated");
+        } catch (SQLException e1) {
         }
         return result;
     }

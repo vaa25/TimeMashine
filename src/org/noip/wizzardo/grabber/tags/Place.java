@@ -49,7 +49,7 @@ public class Place {
                 ", \nedit_info=" + edit_info +
                 ", \nis_protected=" + is_protected +
                 ", \nphotos=" + Util.toString(photos) +
-//                ", \ncomments=" + Util.toString(comments) +
+                ", \ncomments=" + Util.toString(comments) +
                 ", \nlocation=" + location +
                 ", \navailableLanguages=" + availableLanguages +
                 '}';

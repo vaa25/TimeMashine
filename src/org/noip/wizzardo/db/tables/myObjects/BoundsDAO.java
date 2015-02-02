@@ -1,5 +1,6 @@
-package org.noip.wizzardo.db.tables;
+package org.noip.wizzardo.db.tables.myObjects;
 
+import org.noip.wizzardo.db.tables.Table;
 import org.noip.wizzardo.grabber.tags.Polygon;
 
 import java.sql.ResultSet;
@@ -11,13 +12,13 @@ import java.util.List;
 /**
  * Created by Б on 31.01.2015.
  */
-public class TbBounds extends Table {
-    public TbBounds(Statement statement) {
+public class BoundsDAO extends Table {
+    public BoundsDAO(Statement statement) {
         super(statement);
     }
 
     public void create(int idPlace, List<Polygon> bound) {
-        TbPolygons polygons = new TbPolygons(statement);
+        PolygonsDAO polygons = new PolygonsDAO(statement);
         for (Polygon polygon : bound) {
             try {
                 statement.execute("INSERT INTO bounds VALUES (" + idPlace + "," + polygons.create(polygon) + ")");
@@ -46,7 +47,7 @@ public class TbBounds extends Table {
 
     private List<Polygon> readPolygons(List<Integer> idPolygons) {
         List<Polygon> result = new ArrayList<>();
-        TbPolygons polygons = new TbPolygons(statement);
+        PolygonsDAO polygons = new PolygonsDAO(statement);
         for (int idPolygon : idPolygons) {
             result.add(polygons.read(idPolygon));
         }

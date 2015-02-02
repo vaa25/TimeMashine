@@ -1,5 +1,6 @@
-package org.noip.wizzardo.db.tables;
+package org.noip.wizzardo.db.tables.myObjects;
 
+import org.noip.wizzardo.db.tables.Table;
 import org.noip.wizzardo.grabber.tags.Polygon;
 import org.noip.wizzardo.objects.Place;
 
@@ -11,8 +12,8 @@ import java.util.List;
 /**
  * Created by Б on 31.01.2015.
  */
-public class TbPlace extends Table {
-    public TbPlace(Statement statement) {
+public class PlaceDAO extends Table {
+    public PlaceDAO(Statement statement) {
         super(statement);
     }
 
@@ -23,10 +24,10 @@ public class TbPlace extends Table {
                         "VALUES (" +
                         "DEFAULT, " +
                         "'" + place.getTitle() + "'," +
-                        new TbPolygons(statement).create(place.getCenter()) + ")" +
+                        new PolygonsDAO(statement).create(place.getCenter()) + ")" +
                         " RETURNING id").next();
 
-                new TbBounds(statement).create(statement.getResultSet().getInt("id"), place.getBound());
+                new BoundsDAO(statement).create(statement.getResultSet().getInt("id"), place.getBound());
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -58,8 +59,8 @@ public class TbPlace extends Table {
         int idPlace = resultSet.getInt("id");
         int idCenter = resultSet.getInt("center");
         String title = resultSet.getString("title");
-        Polygon center = new TbPolygons(statement).read(idCenter);
-        List<Polygon> bound = new TbBounds(statement).read(idPlace);
+        Polygon center = new PolygonsDAO(statement).read(idCenter);
+        List<Polygon> bound = new BoundsDAO(statement).read(idPlace);
         return new Place(bound, center, title);
     }
 }

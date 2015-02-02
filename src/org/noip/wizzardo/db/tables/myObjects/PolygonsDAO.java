@@ -1,5 +1,6 @@
-package org.noip.wizzardo.db.tables;
+package org.noip.wizzardo.db.tables.myObjects;
 
+import org.noip.wizzardo.db.tables.Table;
 import org.noip.wizzardo.grabber.tags.Polygon;
 
 import java.sql.ResultSet;
@@ -9,9 +10,9 @@ import java.sql.Statement;
 /**
  * Created by Б on 30.01.2015.
  */
-public class TbPolygons extends Table {
+public class PolygonsDAO extends Table {
 
-    public TbPolygons(Statement statement) {
+    public PolygonsDAO(Statement statement) {
         super(statement);
     }
 

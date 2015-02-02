@@ -1,10 +1,8 @@
 package org.noip.wizzardo;
 
-import org.noip.wizzardo.coords.Babylon;
-import org.noip.wizzardo.coords.Edem;
-import org.noip.wizzardo.coords.Edem2;
+import org.noip.wizzardo.coords.*;
 import org.noip.wizzardo.db.DataBase;
-import org.noip.wizzardo.db.tables.TbPlace;
+import org.noip.wizzardo.db.tables.myObjects.PlaceDAO;
 import org.noip.wizzardo.grabber.WmDownloader;
 import org.noip.wizzardo.grabber.WmObjectGenerator;
 import org.noip.wizzardo.objects.Place;
@@ -17,13 +15,18 @@ import java.util.List;
  */
 public class Preparer {
     private List<Place> places;
-    private TbPlace tbPlace;
+    private PlaceDAO tbPlace;
     public List<Place> getPlaces() {
-        tbPlace = new TbPlace(new DataBase().getStatement());
+        tbPlace = new PlaceDAO(new DataBase().getStatement());
         places = new ArrayList<>();
+        addPlace(new Nazareth());
+        addPlace(new Kana());
+        addPlace(new VifaniaJordan());
+        addPlace(new Kapernaum());
         addPlace(new Babylon());
         addPlace(new Edem2());
         addPlace(new Edem());
+        addPlace("Вифсаида", "ru");
         addPlace("Город Давида", "ru");
         addPlace("Масличная гора", "ru");
         addPlace("Garden of Gethsemane", "en");
