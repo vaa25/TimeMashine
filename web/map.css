@@ -1,6 +1,23 @@
-html, body, #map-canvas {
-    width: 80%;
+html, body {
+    width: 100%;
     height: 100%;
-    margin: 0px;
-    padding: 0px
+    margin: 0;
+    padding: 0;
+}
+
+#map-canvas {
+    width: 50%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    float: left;
+}
+
+#text-canvas {
+    width: 50%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    float: right;
+    font-size: 200%;
 }
