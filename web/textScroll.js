@@ -1,5 +1,4 @@
 function move(offset) {
-    console.log();
     function frame() {
         offset--;
         document.getElementById('text').style.marginTop = offset + 'px';
