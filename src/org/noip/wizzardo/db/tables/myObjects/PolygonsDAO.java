@@ -14,6 +14,18 @@ public class PolygonsDAO extends Table {
 
     public PolygonsDAO(Statement statement) {
         super(statement);
+        createTable();
+    }
+
+    protected void createTable() {
+        try {
+            statement.execute("CREATE TABLE IF NOT EXISTS polygons (" +
+                    "id SERIAL NOT NULL UNIQUE PRIMARY KEY," +
+                    "x DOUBLE PRECISION NOT NULL," +
+                    "y DOUBLE PRECISION NOT NULL)");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public int create(Object polygon) {

@@ -18,6 +18,16 @@ public class PlaceDAO extends Table {
         super(statement);
     }
 
+    protected void createTable() {
+        try {
+            statement.execute("CREATE TABLE IF NOT EXISTS places (" +
+                    "id SERIAL NOT NULL UNIQUE PRIMARY KEY," +
+                    "title TEXT NOT NULL," +
+                    "center INTEGER NOT NULL)");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     public void create(Place place) {
         if (!hasPlace(place.getTitle())) {
             try {

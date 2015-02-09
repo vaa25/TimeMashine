@@ -15,6 +15,17 @@ import java.util.List;
 public class BoundsDAO extends Table {
     public BoundsDAO(Statement statement) {
         super(statement);
+        createTable();
+    }
+
+    protected void createTable() {
+        try {
+            statement.execute("CREATE TABLE IF NOT EXISTS bounds (" +
+                    "place_id INTEGER NOT NULL ," +
+                    "polygon_id INTEGER NOT NULL)");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void create(int idPlace, List<Polygon> bound) {

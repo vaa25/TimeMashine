@@ -20,7 +20,6 @@ public class DataBase {
             Class.forName("org.postgresql.Driver");
             Connection connection = getConnection();
             statement = connection.createStatement();
-            new TablePreparer(statement).createTables();
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }

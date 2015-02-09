@@ -12,4 +12,7 @@ public abstract class Table {
     public Table(Statement statement) {
         this.statement = statement;
     }
+
+    protected abstract void createTable();
+
 }
