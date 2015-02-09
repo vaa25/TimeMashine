@@ -40,5 +40,11 @@ public class PolygonsDAO extends Table {
         return null;
     }
 
-
+    public void delete(int id) {
+        try {
+            statement.execute("DELETE from polygons WHERE id=" + id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

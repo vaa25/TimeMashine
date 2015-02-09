@@ -31,7 +31,6 @@ public class BoundsDAO extends Table {
     public List<Polygon> read(int idPlace) {
         return readPolygons(readPolygonsId(idPlace));
     }
-
     private List<Integer> readPolygonsId(int idPlace) {
         List<Integer> idPolygons = new ArrayList<>();
         try {
@@ -43,6 +42,26 @@ public class BoundsDAO extends Table {
             e.printStackTrace();
         }
         return idPolygons;
+    }
+
+    public void delete(int idPlace) {
+        deletePolygons(readPolygonsId(idPlace));
+        deleteBound(idPlace);
+    }
+
+    private void deletePolygons(List<Integer> idPolygons) {
+        PolygonsDAO polygons = new PolygonsDAO(statement);
+        for (int idPolygon : idPolygons) {
+            polygons.delete(idPolygon);
+        }
+    }
+
+    private void deleteBound(int idPlace) {
+        try {
+            statement.execute("delete from bounds WHERE place_id=" + idPlace);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private List<Polygon> readPolygons(List<Integer> idPolygons) {

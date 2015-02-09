@@ -13,6 +13,7 @@ import java.util.List;
  * Created by Б on 31.01.2015.
  */
 public class PlaceDAO extends Table {
+    private Place place;
     public PlaceDAO(Statement statement) {
         super(statement);
     }
@@ -24,14 +25,21 @@ public class PlaceDAO extends Table {
                         "VALUES (" +
                         "DEFAULT, " +
                         "'" + place.getTitle() + "'," +
-                        new PolygonsDAO(statement).create(place.getCenter()) + ")" +
+                        createCenter(place) + ")" +
                         " RETURNING id").next();
-
-                new BoundsDAO(statement).create(statement.getResultSet().getInt("id"), place.getBound());
+                createBound(place, statement.getResultSet().getInt("id"));
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    private void createBound(Place place, int id) {
+        new BoundsDAO(statement).create(id, place.getBound());
+    }
+
+    private int createCenter(Place place) {
+        return new PolygonsDAO(statement).create(place.getCenter());
     }
 
     public boolean hasPlace(String title) {
@@ -62,5 +70,20 @@ public class PlaceDAO extends Table {
         Polygon center = new PolygonsDAO(statement).read(idCenter);
         List<Polygon> bound = new BoundsDAO(statement).read(idPlace);
         return new Place(bound, center, title);
+    }
+
+    public void delete(String title) {
+        if (!hasPlace(title)) return;
+        try {
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM places WHERE title='" + title + "'");
+            if (resultSet.next()) {
+                int idPlace = resultSet.getInt("id");
+                int idCenter = resultSet.getInt("center");
+                new BoundsDAO(statement).delete(idPlace);
+                new PolygonsDAO(statement).delete(idCenter);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
