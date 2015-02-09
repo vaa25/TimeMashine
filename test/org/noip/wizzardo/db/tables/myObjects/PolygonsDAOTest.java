@@ -10,10 +10,12 @@ import org.noip.wizzardo.grabber.tags.Polygon;
 public class PolygonsDAOTest extends TestCase {
     private int id;
     private PolygonsDAO dao;
-
+    private Polygon polygon;
     @Before
     public void setUp() throws Exception {
+        //given
         dao = new PolygonsDAO(new DataBase().getStatement());
+        polygon = new Polygon(1, 2);
     }
 
     @After
@@ -23,9 +25,6 @@ public class PolygonsDAOTest extends TestCase {
 
     @Test
     public void testCreate() throws Exception {
-        //given
-        Polygon polygon = new Polygon(1, 2);
-
         //when
         id = dao.create(polygon);
 
@@ -36,7 +35,6 @@ public class PolygonsDAOTest extends TestCase {
     @Test
     public void testRead() throws Exception {
         //given
-        Polygon polygon = new Polygon(3, 2);
         id = dao.create(polygon);
 
         //when then
@@ -46,7 +44,6 @@ public class PolygonsDAOTest extends TestCase {
     @Test
     public void testDelete() throws Exception {
         //given
-        Polygon polygon = new Polygon(3, 2);
         id = dao.create(polygon);
 
         //when

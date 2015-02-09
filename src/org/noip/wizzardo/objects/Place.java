@@ -42,14 +42,12 @@ public class Place {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null) return false;
 
         Place place = (Place) o;
 
-        if (!center.equals(place.center)) return false;
-        if (!title.equals(place.title)) return false;
+        return center.equals(place.center) && title.equals(place.title);
 
-        return true;
     }
 
     @Override

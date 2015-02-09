@@ -13,7 +13,6 @@ import java.util.List;
  * Created by Б on 31.01.2015.
  */
 public class PlaceDAO extends Table {
-    private Place place;
     public PlaceDAO(Statement statement) {
         super(statement);
     }
@@ -89,9 +88,18 @@ public class PlaceDAO extends Table {
             if (resultSet.next()) {
                 int idPlace = resultSet.getInt("id");
                 int idCenter = resultSet.getInt("center");
+                deleteById(idPlace);
                 new BoundsDAO(statement).delete(idPlace);
                 new PolygonsDAO(statement).delete(idCenter);
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void deleteById(int id) {
+        try {
+            statement.execute("DELETE FROM places WHERE id=" + id);
         } catch (SQLException e) {
             e.printStackTrace();
         }
