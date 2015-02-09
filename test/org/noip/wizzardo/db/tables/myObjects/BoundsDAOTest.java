@@ -4,77 +4,56 @@ import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.noip.wizzardo.db.DataBase;
 import org.noip.wizzardo.grabber.tags.Polygon;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BoundsDAOTest extends TestCase {
+    private final int id = 987654321;
     private BoundsDAO dao;
-    private Statement statement;
-    private Connection connection;
-
+    private List<Polygon> bound;
     @Before
     public void setUp() throws Exception {
-        Class.forName("org.postgresql.Driver");
-        connection = getConnection();
-        statement = connection.createStatement();
-        dao = new BoundsDAO(statement);
+        dao = new BoundsDAO(new DataBase().getStatement());
+        bound = new ArrayList<>();
+        bound.add(new Polygon(1, 2));
+        bound.add(new Polygon(2, 3));
     }
 
     @After
     public void tearDown() throws Exception {
-        statement.close();
-        connection.close();
+        dao.delete(id);
     }
 
     @Test
     public void testCreate() throws Exception {
-        List<Polygon> list = new ArrayList<>();
-        list.add(new Polygon(1, 2));
-        list.add(new Polygon(3, 4));
-        list.add(new Polygon(5, 6));
-        list.add(new Polygon(7, 8));
-        dao.create(987654321, list);
+        //when
+        dao.create(id, bound);
 
-        List<Polygon> result = dao.read(987654321);
-        assertEquals(list, result);
+        //then
+        assertEquals(bound, dao.read(id));
     }
 
     @Test
     public void testRead() throws Exception {
+        //given
+        dao.create(id, bound);
 
+        //when then
+        assertEquals(bound, dao.read(id));
     }
 
-    private Connection getConnection() throws SQLException {
-        Connection result = getWizzardoConnection();
-        if (result == null) {
-            result = getLocalConnection();
-        }
-        return result;
-    }
+    @Test
+    public void testDelete() throws Exception {
+        //given
+        dao.create(id, bound);
 
-    private Connection getWizzardoConnection() {
-        Connection result = null;
-        try {
-            result = DriverManager.getConnection("jdbc:postgresql://localhost:5432/hijack", "hijack", "1234");
-            System.out.println("Wizzardo postgresql activated");
-        } catch (SQLException e) {
-        }
-        return result;
-    }
+        //when
+        dao.delete(id);
 
-    private Connection getLocalConnection() throws SQLException {
-        Connection result = null;
-        try {
-            result = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "1234");
-            System.out.println("localhost postgresql activated");
-        } catch (SQLException e1) {
-        }
-        return result;
+        // then
+        assertEquals(0, dao.read(id).size());
     }
 }

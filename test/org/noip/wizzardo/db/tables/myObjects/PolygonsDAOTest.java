@@ -8,7 +8,7 @@ import org.noip.wizzardo.db.DataBase;
 import org.noip.wizzardo.grabber.tags.Polygon;
 
 public class PolygonsDAOTest extends TestCase {
-    int id;
+    private int id;
     private PolygonsDAO dao;
 
     @Before
