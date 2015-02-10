@@ -15,9 +15,9 @@ import java.util.List;
  */
 public class Preparer {
     private List<Place> places;
-    private PlaceDAO tbPlace;
+    private PlaceDAO placeDAO;
     public List<Place> getPlaces() {
-        tbPlace = new PlaceDAO(new DataBase().getStatement());
+        placeDAO = new PlaceDAO(new DataBase().getStatement());
         places = new ArrayList<>();
         addPlace(new Nazareth());
         addPlace(new Kana());
@@ -35,20 +35,20 @@ public class Preparer {
     }
 
     private List<Place> addPlace(Place place) {
-        if (!tbPlace.hasPlace(place.getTitle())) {
-            tbPlace.create(place);
+        if (!placeDAO.hasPlace(place.getTitle())) {
+            placeDAO.create(place);
         }
         places.add(place);
         return places;
     }
 
     private List<Place> addPlace(String title, String language) {
-        Place place = null;
-        if (!tbPlace.hasPlace(title)) {
+        Place place;
+        if (!placeDAO.hasPlace(title)) {
             place = downloadPlace(title, language);
-            tbPlace.create(place);
+            placeDAO.create(place);
         } else {
-            place = tbPlace.read(title);
+            place = placeDAO.read(title);
         }
         if (place != null) {
             places.add(place);
@@ -57,9 +57,9 @@ public class Preparer {
     }
 
     private Place downloadPlace(String title, String language) {
-        WmDownloader grabber = new WmDownloader(title);
-        grabber.setLanguage(language);
-        WmObjectGenerator generator = new WmObjectGenerator(grabber.downloadWm());
+        WmDownloader wmDownloader = new WmDownloader(title);
+        wmDownloader.setLanguage(language);
+        WmObjectGenerator generator = new WmObjectGenerator(wmDownloader.downloadWm());
         generator.setPlaceTitle(title);
         return generator.getPlace();
     }

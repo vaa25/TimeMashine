@@ -14,5 +14,4 @@ public abstract class Table {
     }
 
     protected abstract void createTable();
-
 }
