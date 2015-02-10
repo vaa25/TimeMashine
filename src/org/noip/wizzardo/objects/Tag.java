@@ -14,16 +14,23 @@ public class Tag {
         return openTag() + string + closeTag();
     }
 
+    public String insertOpen(String string) {
+        return openTag() + string;
+    }
+
+    public String insertClose(String string) {
+        return string + closeTag();
+    }
     public void setAttribute(String name, String value) {
         attributes.setAttribute(name, value);
     }
 
     private String closeTag() {
-        return "</" + name + attributes.getAttributes() + '>';
+        return "</" + name + '>';
     }
 
     private String openTag() {
-        return '<' + name + '>';
+        return '<' + name + attributes.getAttributes() + '>';
     }
 
     private class Attributes {

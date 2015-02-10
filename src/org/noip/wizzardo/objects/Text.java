@@ -6,12 +6,10 @@ package org.noip.wizzardo.objects;
 public class Text {
     boolean wordIsFirst;
     private String[] words;
-    private String source;
     private StringBuilder result;
     private String[] punctuation;
 
     public Text(String source) {
-        this.source = source;
         result = new StringBuilder();
         words = source.split("[^а-яА-Я]+");
         punctuation = source.split("[а-яА-Я]+");
@@ -22,22 +20,36 @@ public class Text {
         words[index] = tag.insert(words[index]);
     }
 
+    public void setTag(Tag tag, int indexStart, int indexFinish) {
+        words[indexStart] = tag.insertOpen(words[indexStart]);
+        words[indexFinish] = tag.insertClose(words[indexFinish]);
+    }
+
     public String getResult() {
+        buildText();
         return result.toString();
     }
 
-    private void insertPunctuation() {
+    private void buildText() {
         for (int i = 0; i < Math.min(words.length, punctuation.length); i++) {
-            if (wordIsFirst) {
-                result.append(words[i]).append(punctuation[i]);
-            } else {
-                result.append(punctuation[i]).append(words[i]);
-            }
+            getNextPairOfElements(i);
         }
+        getLastElement();
+    }
+
+    private void getLastElement() {
         if (words.length > punctuation.length) {
             result.append(words[words.length - 1]);
         } else if (words.length < punctuation.length) {
             result.append(punctuation[punctuation.length - 1]);
+        }
+    }
+
+    private void getNextPairOfElements(int i) {
+        if (wordIsFirst) {
+            result.append(words[i]).append(punctuation[i]);
+        } else {
+            result.append(punctuation[i]).append(words[i]);
         }
     }
 }
