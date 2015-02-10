@@ -11,11 +11,20 @@ public class Text {
 
     public Text(String source) {
         result = new StringBuilder();
-        words = source.split("[^а-яА-Я]+");
-        punctuation = source.split("[а-яА-Я]+");
+        words = trim(source.split("[^а-яА-Я]+"));
+        punctuation = trim(source.split("[а-яА-Я]+"));
         wordIsFirst = source.startsWith(words[0]);
     }
 
+    private String[] trim(String[] array) {
+        if ("".equals(array[0])) {
+            String[] result = new String[array.length - 1];
+            System.arraycopy(array, 1, result, 0, result.length);
+            return result;
+        } else {
+            return array;
+        }
+    }
     public void setTag(Tag tag, int index) {
         words[index] = tag.insert(words[index]);
     }
