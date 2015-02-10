@@ -4,7 +4,7 @@ package org.noip.wizzardo.objects;
  * Created by vaa25 on 10.02.2015.
  */
 public class Text {
-    boolean wordIsFirst;
+    private boolean wordIsFirst;
     private String[] words;
     private StringBuilder result;
     private String[] punctuation;
