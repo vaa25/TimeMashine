@@ -1,6 +1,6 @@
 package org.noip.wizzardo.grabber.tags;
 
-import org.noip.wizzardo.grabber.utils.Util;
+import org.noip.wizzardo.grabber.utils.GrabberUtil;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ public class Wm {
         return "Wm{" +
                 "language='" + language + '\'' +
                 ", \nfound=" + found +
-                ", \nplaces=" + Util.toString(places) +
+                ", \nplaces=" + GrabberUtil.toString(places) +
                 ", \npage=" + page +
                 ", \ncount=" + count +
                 ", \ndebug=" + debug +

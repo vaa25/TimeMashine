@@ -1,6 +1,6 @@
 package org.noip.wizzardo.grabber.tags;
 
-import org.noip.wizzardo.grabber.utils.Util;
+import org.noip.wizzardo.grabber.utils.GrabberUtil;
 
 import java.util.List;
 
@@ -36,7 +36,7 @@ public class Location {
                 ", \nstate='" + state + '\'' +
                 ", \nplace='" + place + '\'' +
                 ", \ncountry_adm_id=" + country_adm_id +
-                ", \ngadm=" + Util.toString(gadm) +
+                ", \ngadm=" + GrabberUtil.toString(gadm) +
                 ", \ncity_id=" + city_id +
                 ", \ncity='" + city + '\'' +
                 ", \nzoom=" + zoom +

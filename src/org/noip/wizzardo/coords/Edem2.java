@@ -11,6 +11,6 @@ import java.util.ArrayList;
 public class Edem2 extends Place {
     public Edem2() {
         super(new ArrayList<Polygon>(), new Polygon(47.563685, 37.948225), "Эдем");
-        bound = Util.getCircle(center, 0.1, 10);
+        bound = CoordUtil.getCircle(center, 0.1, 10);
     }
 }

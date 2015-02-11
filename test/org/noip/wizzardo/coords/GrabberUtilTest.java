@@ -3,11 +3,12 @@ package org.noip.wizzardo.coords;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.noip.wizzardo.grabber.tags.Polygon;
+import org.noip.wizzardo.grabber.utils.GrabberUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UtilTest extends TestCase {
+public class GrabberUtilTest extends TestCase {
 
     @Test
     public void testGetCircle() throws Exception {
@@ -16,8 +17,8 @@ public class UtilTest extends TestCase {
         int radius = 10;
         int numberOfSides = 4;
         // when then
-        assertEquals(org.noip.wizzardo.grabber.utils.Util.toString(Util.getCircle(center, radius, numberOfSides)),
-                org.noip.wizzardo.grabber.utils.Util.toString(getCircle()));
+        assertEquals(GrabberUtil.toString(CoordUtil.getCircle(center, radius, numberOfSides)),
+                GrabberUtil.toString(getCircle()));
     }
 
     private List<Polygon> getCircle() {
@@ -34,6 +35,6 @@ public class UtilTest extends TestCase {
         // given
         List<Polygon> given = getCircle();
         // when then
-        assertEquals(new Polygon(100, 100).toString(), Util.getCenter(given).toString());
+        assertEquals(new Polygon(100, 100).toString(), CoordUtil.getCenter(given).toString());
     }
 }

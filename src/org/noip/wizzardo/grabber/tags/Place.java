@@ -1,6 +1,6 @@
 package org.noip.wizzardo.grabber.tags;
 
-import org.noip.wizzardo.grabber.utils.Util;
+import org.noip.wizzardo.grabber.utils.GrabberUtil;
 
 import java.util.List;
 
@@ -36,7 +36,7 @@ public class Place {
                 ", \nlanguage_id=" + language_id +
                 ", \nlanguage_iso='" + language_iso + '\'' +
                 ", \nurlhtml='" + urlhtml + '\'' +
-                ", \ntags='" + Util.toString(tags) +
+                ", \ntags='" + GrabberUtil.toString(tags) +
                 ", \ntitle='" + title + '\'' +
                 ", \ndistance=" + distance +
                 ", \ndescription'=" + description + '\'' +
@@ -45,11 +45,11 @@ public class Place {
                 ", \nis_region=" + is_region +
                 ", \nis_deleted=" + is_deleted +
                 ", \nparent_id=" + parent_id +
-                ", \npolygon=" + Util.toString(polygon) +
+                ", \npolygon=" + GrabberUtil.toString(polygon) +
                 ", \nedit_info=" + edit_info +
                 ", \nis_protected=" + is_protected +
-                ", \nphotos=" + Util.toString(photos) +
-                ", \ncomments=" + Util.toString(comments) +
+                ", \nphotos=" + GrabberUtil.toString(photos) +
+                ", \ncomments=" + GrabberUtil.toString(comments) +
                 ", \nlocation=" + location +
                 ", \navailableLanguages=" + availableLanguages +
                 '}';

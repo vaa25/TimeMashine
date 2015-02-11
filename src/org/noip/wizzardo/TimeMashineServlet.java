@@ -14,7 +14,9 @@ import java.io.IOException;
 public class TimeMashineServlet extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Gson gson = new Gson();
-        req.setAttribute("places", gson.toJson(new Preparer().getPlaces()));
+        Acts1Preparer preparer = new Acts1Preparer();
+        req.setAttribute("places", gson.toJson(preparer.getPlaces()));
+        req.setAttribute("text", gson.toJson(preparer.getText()));
         getServletContext().getRequestDispatcher("/map.jsp").forward(req, resp);
     }
 

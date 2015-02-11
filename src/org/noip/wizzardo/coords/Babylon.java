@@ -14,6 +14,6 @@ public class Babylon extends Place {
         bound.add(new Polygon(44.416902, 32.543229));
         bound.add(new Polygon(44.444338, 32.540380));
         bound.add(new Polygon(44.426806, 32.522259));
-        center = Util.getCenter(bound);
+        center = CoordUtil.getCenter(bound);
     }
 }

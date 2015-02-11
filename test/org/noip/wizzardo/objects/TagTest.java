@@ -3,13 +3,14 @@ package org.noip.wizzardo.objects;
 import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
+import org.noip.wizzardo.objects.tags.Tag;
 
 public class TagTest extends TestCase {
     private Tag tag;
 
     @Before
     public void setUp() throws Exception {
-        tag = new Tag();
+        tag = new Tag("tag");
     }
 
     @Test

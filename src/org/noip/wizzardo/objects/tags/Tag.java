@@ -1,4 +1,4 @@
-package org.noip.wizzardo.objects;
+package org.noip.wizzardo.objects.tags;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,6 +9,10 @@ import java.util.Map;
 public class Tag {
     private String name = "tag";
     private Attributes attributes = new Attributes();
+
+    public Tag(String name) {
+        this.name = name;
+    }
 
     public String insert(String string) {
         return openTag() + string + closeTag();

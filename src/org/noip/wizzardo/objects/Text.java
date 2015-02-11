@@ -1,5 +1,9 @@
 package org.noip.wizzardo.objects;
 
+import org.noip.wizzardo.objects.tags.Tag;
+
+import java.util.Arrays;
+
 /**
  * Created by vaa25 on 10.02.2015.
  */
@@ -34,8 +38,18 @@ public class Text {
         words[indexFinish] = tag.insertClose(words[indexFinish]);
     }
 
-    public String getResult() {
+    public String toString() {
         buildText();
+        return result.toString();
+    }
+
+    public String getIndexed() {
+        String[] temp = Arrays.copyOf(words, words.length);
+        for (int i = 0; i < words.length; i++) {
+            words[i] = " " + i + ")" + words[i];
+        }
+        buildText();
+        words = temp;
         return result.toString();
     }
 

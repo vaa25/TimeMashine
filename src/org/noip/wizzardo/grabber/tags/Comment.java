@@ -1,6 +1,6 @@
 package org.noip.wizzardo.grabber.tags;
 
-import org.noip.wizzardo.grabber.utils.Util;
+import org.noip.wizzardo.grabber.utils.GrabberUtil;
 
 import java.util.List;
 
@@ -43,7 +43,7 @@ public class Comment {
                 ", \nmoder_uid=" + moder_uid +
                 ", \nmoder_name='" + moder_name + '\'' +
                 ", \nis_deleted=" + is_deleted +
-                ", \nreplies=" + Util.toString(replies) +
+                ", \nreplies=" + GrabberUtil.toString(replies) +
                 '}';
     }
 }

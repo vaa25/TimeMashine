@@ -7,14 +7,14 @@ import org.noip.wizzardo.grabber.tags.Polygon;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UtilTest extends TestCase {
+public class GrabberUtilTest extends TestCase {
 
     @Test
     public void testToString() throws Exception {
         // given
         List list = getToStringGiven();
         // when then
-        assertEquals(getToStringThen(), Util.toString(list));
+        assertEquals(getToStringThen(), GrabberUtil.toString(list));
 
     }
 
@@ -37,13 +37,13 @@ public class UtilTest extends TestCase {
     @Test
     public void testToStringNull() throws Exception {
         List given = null;
-        assertEquals("absent", Util.toString(given));
+        assertEquals("absent", GrabberUtil.toString(given));
     }
 
     @Test
     public void testDownload() throws Exception {
         // when
-        String data = Util.download("http://www.google.com");
+        String data = GrabberUtil.download("http://www.google.com");
         // then
         assertTrue(data.length() > 0);
     }

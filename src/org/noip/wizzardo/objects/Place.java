@@ -1,6 +1,7 @@
 package org.noip.wizzardo.objects;
 
 import org.noip.wizzardo.grabber.tags.Polygon;
+import org.noip.wizzardo.grabber.utils.GrabberUtil;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class Place {
     @Override
     public String toString() {
         return "Place{" +
-                "polygons=" + org.noip.wizzardo.grabber.utils.Util.toString(bound) +
+                "polygons=" + GrabberUtil.toString(bound) +
                 ", \ncenter=" + center +
                 ", \ntitle='" + title + '\'' +
                 '}';

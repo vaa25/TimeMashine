@@ -2,7 +2,7 @@ package org.noip.wizzardo.grabber;
 
 import com.google.gson.Gson;
 import org.noip.wizzardo.grabber.tags.Wm;
-import org.noip.wizzardo.grabber.utils.Util;
+import org.noip.wizzardo.grabber.utils.GrabberUtil;
 
 /**
  * Created by Б on 18.01.2015.
@@ -42,7 +42,7 @@ public class WmDownloader {
     }
 
     public Wm downloadWm() {
-        return new Gson().fromJson(Util.download(getUrl()), Wm.class);
+        return new Gson().fromJson(GrabberUtil.download(getUrl()), Wm.class);
     }
 
     public void setLanguage(String language) {

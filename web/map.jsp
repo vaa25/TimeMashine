@@ -5,14 +5,12 @@
 <body>
 <div id="map-canvas"></div>
 <div id="text-canvas">
-    <div id="text">
-        <%@ include file="text.txt" %>
-    </div>
+    <div id="text"></div>
 </div>
 
 </body>
 <head>
-    <title>Simple click event</title>
+    <title>Машина времени</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <LINK rel=stylesheet type="text/css" href=map.css>
@@ -22,7 +20,7 @@
     <script src="textScroll.js"></script>
     <script>
         google.maps.event.addDomListener(window, 'load', initialize(${places}));
-        window.onload = move(window.innerHeight);
+        window.onload = move(${text}, window.innerHeight);
     </script>
 </head>
 </html>

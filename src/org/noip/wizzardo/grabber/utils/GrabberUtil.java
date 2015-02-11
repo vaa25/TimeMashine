@@ -1,5 +1,9 @@
 package org.noip.wizzardo.grabber.utils;
 
+import org.noip.wizzardo.grabber.WmDownloader;
+import org.noip.wizzardo.grabber.WmObjectGenerator;
+import org.noip.wizzardo.objects.Place;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -9,7 +13,7 @@ import java.util.List;
 /**
  * Created by Б on 18.01.2015.
  */
-public class Util {
+public class GrabberUtil {
     public static String toString(List list) {
         if (list == null) {
             return "absent";
@@ -36,5 +40,13 @@ public class Util {
             e.printStackTrace();
         }
         return result.toString();
+    }
+
+    public static Place downloadPlace(String title, String language) {
+        WmDownloader wmDownloader = new WmDownloader(title);
+        wmDownloader.setLanguage(language);
+        WmObjectGenerator generator = new WmObjectGenerator(wmDownloader.downloadWm());
+        generator.setPlaceTitle(title);
+        return generator.getPlace();
     }
 }

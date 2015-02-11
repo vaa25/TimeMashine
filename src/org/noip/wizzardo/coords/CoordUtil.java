@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by Б on 16.01.2015.
  */
-public class Util {
+public class CoordUtil {
     public static List<Polygon> getCircle(Polygon center, double radius, int count) {
         List<Polygon> result = new ArrayList<>(count);
         for (double angle = 0; angle < Math.PI * 2; angle += Math.PI * 2 / count) {

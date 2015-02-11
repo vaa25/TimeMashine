@@ -1,5 +1,4 @@
-function move(offset) {
-    var text = document.getElementById('text');
+function move(text, offset) {
     console.log(offset / text.clientHeight);
     function frame() {
         offset--;

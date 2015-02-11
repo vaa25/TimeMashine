@@ -1,10 +1,11 @@
 package org.noip.wizzardo;
 
-import org.noip.wizzardo.coords.*;
 import org.noip.wizzardo.db.DataBase;
 import org.noip.wizzardo.db.tables.myObjects.PlaceDAO;
 import org.noip.wizzardo.grabber.utils.GrabberUtil;
 import org.noip.wizzardo.objects.Place;
+import org.noip.wizzardo.objects.Text;
+import org.noip.wizzardo.objects.tags.Tag;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,25 +13,32 @@ import java.util.List;
 /**
  * Created by Б on 21.01.2015.
  */
-public class Preparer {
+public class Acts1Preparer {
     private List<Place> places;
     private PlaceDAO placeDAO;
+
     public List<Place> getPlaces() {
         placeDAO = new PlaceDAO(new DataBase().getStatement());
         places = new ArrayList<>();
         addPlace("Масличная гора", "ru");
-        addPlace(new Nazareth());
-        addPlace(new Kana());
-        addPlace(new VifaniaJordan());
-        addPlace(new Kapernaum());
-        addPlace(new Babylon());
-        addPlace(new Edem2());
-        addPlace(new Edem());
-        addPlace("Вифсаида", "ru");
         addPlace("Город Давида", "ru");
-        addPlace("Garden of Gethsemane", "en");
-        addPlace("Mount Zion", "en");
+
         return places;
+    }
+
+    public String getText() {
+        Text text = new Text(Utils.loadText("acts1.txt"));
+
+        Tag yerusalemTag = new Tag("place");
+        yerusalemTag.setAttribute("placeName", "Город Давида");
+        yerusalemTag.setAttribute("visualName", "Иерусалим");
+        text.setTag(yerusalemTag, 214);
+
+        Tag eleonTag = new Tag("place");
+        eleonTag.setAttribute("placeName", "Масличная гора");
+        eleonTag.setAttribute("visualName", "Масличная гора");
+        text.setTag(eleonTag, 216, 218);
+        return text.toString();
     }
 
     private List<Place> addPlace(Place place) {

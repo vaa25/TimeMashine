@@ -3,6 +3,7 @@ package org.noip.wizzardo.objects;
 import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
+import org.noip.wizzardo.objects.tags.Tag;
 
 public class TextTest extends TestCase {
     private Text text;
@@ -13,7 +14,7 @@ public class TextTest extends TestCase {
     public void setUp() throws Exception {
         //given
         text = new Text(source);
-        tag = new Tag();
+        tag = new Tag("tag");
         tag.setAttribute("first", "1");
     }
 
@@ -23,7 +24,7 @@ public class TextTest extends TestCase {
         text.setTag(tag, 2);
 
         //then
-        assertEquals("- И сказал <tag first=\"1\">Бог</tag>: да будет свет. И стал свет.\n", text.getResult());
+        assertEquals("- И сказал <tag first=\"1\">Бог</tag>: да будет свет. И стал свет.\n", text.toString());
     }
 
     @Test
@@ -32,12 +33,12 @@ public class TextTest extends TestCase {
         text.setTag(tag, 3, 5);
 
         //then
-        assertEquals("- И сказал Бог: <tag first=\"1\">да будет свет</tag>. И стал свет.\n", text.getResult());
+        assertEquals("- И сказал Бог: <tag first=\"1\">да будет свет</tag>. И стал свет.\n", text.toString());
     }
 
     @Test
     public void testGetResult() throws Exception {
         //when then
-        assertEquals(source, text.getResult());
+        assertEquals(source, text.toString());
     }
 }
