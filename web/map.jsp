@@ -5,7 +5,7 @@
 <body>
 <div id="map-canvas"></div>
 <div id="text-canvas">
-    <div id="text"></div>
+    <div id="text">${text}</div>
 </div>
 
 </body>
@@ -20,7 +20,7 @@
     <script src="textScroll.js"></script>
     <script>
         google.maps.event.addDomListener(window, 'load', initialize(${places}));
-        window.onload = move(${text}, window.innerHeight);
+        window.onload = move();
     </script>
 </head>
 </html>

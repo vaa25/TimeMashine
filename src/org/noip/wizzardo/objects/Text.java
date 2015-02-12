@@ -29,7 +29,12 @@ public class Text {
             return array;
         }
     }
+
+    public void setTag(Tag tag) {
+        result.append(tag.insert(""));
+    }
     public void setTag(Tag tag, int index) {
+        tag.setAttribute("id", String.valueOf(index));
         words[index] = tag.insert(words[index]);
     }
 
@@ -38,6 +43,9 @@ public class Text {
         words[indexFinish] = tag.insertClose(words[indexFinish]);
     }
 
+    public int size() {
+        return words.length;
+    }
     public String toString() {
         buildText();
         return result.toString();

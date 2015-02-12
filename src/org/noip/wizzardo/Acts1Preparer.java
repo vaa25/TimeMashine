@@ -29,15 +29,20 @@ public class Acts1Preparer {
     public String getText() {
         Text text = new Text(Utils.loadText("acts1.txt"));
 
+        Tag meta = new Tag("meta");
+        meta.setAttribute("id", "meta");
+        meta.setAttribute("size", String.valueOf(text.size()));
+        text.setTag(meta);
+
         Tag yerusalemTag = new Tag("place");
         yerusalemTag.setAttribute("placeName", "Город Давида");
         yerusalemTag.setAttribute("visualName", "Иерусалим");
-        text.setTag(yerusalemTag, 214);
+        text.setTag(yerusalemTag, 216);
 
         Tag eleonTag = new Tag("place");
         eleonTag.setAttribute("placeName", "Масличная гора");
         eleonTag.setAttribute("visualName", "Масличная гора");
-        text.setTag(eleonTag, 216, 218);
+        text.setTag(eleonTag, 220);
         return text.toString();
     }
 

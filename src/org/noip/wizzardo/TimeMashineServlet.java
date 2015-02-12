@@ -16,7 +16,9 @@ public class TimeMashineServlet extends HttpServlet {
         Gson gson = new Gson();
         Acts1Preparer preparer = new Acts1Preparer();
         req.setAttribute("places", gson.toJson(preparer.getPlaces()));
-        req.setAttribute("text", gson.toJson(preparer.getText()));
+        req.setAttribute("text", preparer.getText());
+//        req.setAttribute("text", gson.toJson("от которого "));
+        System.out.println(req.getAttribute("text"));
         getServletContext().getRequestDispatcher("/map.jsp").forward(req, resp);
     }
 

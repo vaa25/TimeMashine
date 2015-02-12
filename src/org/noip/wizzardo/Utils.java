@@ -9,30 +9,32 @@ import java.util.List;
  */
 public class Utils {
     private static List<String> lines;
+    private static String name;
 
-    public static String loadText(String name) {
+    public static String loadText(String name2) {
+        name = name2;
         lines = new ArrayList<>();
-        getResource(name);
+        getTextResource();
         return getString();
     }
 
     private static String getString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (String line : lines) {
-            stringBuilder.append(line);
+            stringBuilder.append(line).append(' ');
         }
         return stringBuilder.toString();
     }
 
-    private static void getResource(String name) {
-        try (BufferedReader reader = getBufferedReader(name)) {
+    private static void getTextResource() {
+        try (BufferedReader reader = getBufferedReader()) {
             readLines(reader);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static BufferedReader getBufferedReader(String name) throws UnsupportedEncodingException {
+    private static BufferedReader getBufferedReader() throws UnsupportedEncodingException {
         return new BufferedReader(new InputStreamReader(Utils.class.getResourceAsStream(
                 "resources" + File.separatorChar + name), "UTF-8"));
     }
