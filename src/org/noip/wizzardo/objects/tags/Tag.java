@@ -1,5 +1,8 @@
 package org.noip.wizzardo.objects.tags;
 
+import com.google.gson.Gson;
+import org.noip.wizzardo.grabber.tags.Polygon;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,6 +32,9 @@ public class Tag {
         attributes.setAttribute(name, value);
     }
 
+    public void setAttribute(String name, Polygon value) {
+        attributes.setAttribute(name, new Gson().toJson(value));
+    }
     private String closeTag() {
         return "</" + name + '>';
     }
@@ -57,7 +63,7 @@ public class Tag {
         }
 
         private void insertAttribute(String name) {
-            result.append(' ').append(name).append("=\"").append(attributes.get(name)).append('"');
+            result.append(' ').append(name).append("=\'").append(attributes.get(name)).append('\'');
         }
 
     }

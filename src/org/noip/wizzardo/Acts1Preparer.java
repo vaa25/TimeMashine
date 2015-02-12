@@ -2,6 +2,7 @@ package org.noip.wizzardo;
 
 import org.noip.wizzardo.db.DataBase;
 import org.noip.wizzardo.db.tables.myObjects.PlaceDAO;
+import org.noip.wizzardo.grabber.tags.Polygon;
 import org.noip.wizzardo.grabber.utils.GrabberUtil;
 import org.noip.wizzardo.objects.Place;
 import org.noip.wizzardo.objects.Text;
@@ -32,6 +33,8 @@ public class Acts1Preparer {
         Tag meta = new Tag("meta");
         meta.setAttribute("id", "meta");
         meta.setAttribute("size", String.valueOf(text.size()));
+        meta.setAttribute("zoom", String.valueOf(15));
+        meta.setAttribute("position", new Polygon(35, 32));
         text.setTag(meta);
 
         Tag yerusalemTag = new Tag("place");
@@ -41,7 +44,7 @@ public class Acts1Preparer {
 
         Tag eleonTag = new Tag("place");
         eleonTag.setAttribute("placeName", "Масличная гора");
-        eleonTag.setAttribute("visualName", "Масличная гора");
+        eleonTag.setAttribute("visualName", "Елеон\n(Масличная гора)");
         text.setTag(eleonTag, 220);
         return text.toString();
     }
