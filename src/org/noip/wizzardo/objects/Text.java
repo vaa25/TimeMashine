@@ -51,6 +51,18 @@ public class Text {
         return result.toString();
     }
 
+    public String search(String word) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < words.length; i++) {
+            if (word.equals(words[i])) {
+                builder.append(i).append(' ');
+            }
+        }
+        if (builder.length() == 0) {
+            builder.append('"').append(word).append("\" not found");
+        }
+        return builder.toString();
+    }
     public String getIndexed() {
         String[] temp = Arrays.copyOf(words, words.length);
         for (int i = 0; i < words.length; i++) {

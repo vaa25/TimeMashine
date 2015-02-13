@@ -2,38 +2,61 @@
  * Created by vaa25 on 13.02.2015.
  */
 var map;
+var queue = [];
+var busy = false;
+function smoothPanToBounds(newZoom, latLngBounds) {
 
-function smoothPanToBounds(newValue, latLngBounds) {
-    var oldValue = map.getZoom();
+    if (busy) {
+        queue.push({
+            zoom: newZoom,
+            bound: latLngBounds
+        });
+        return;
+    }
+
+    var oldZoom = map.getZoom();
     var step = getStep();
-    var value = oldValue;
-    var queue = [];
-    queue.push({
-        zoom: newValue,
-        bound: latLngBounds
-    });
-    console.log(oldValue);
-    console.log(newValue);
+    var value = oldZoom;
+    busy = true;
+    var timer = setInterval(zoomTo, 300);
 
     function getStep() {
-        if (oldValue < newValue)return 1;
-        if (oldValue > newValue)return -1;
+        if (oldZoom < newZoom)return 1;
+        if (oldZoom > newZoom)return -1;
         return 0;
     }
 
     function zoomTo() {
         value += step;
-        console.log(value);
         map.setZoom(value);
         map.panToBounds(latLngBounds);
-        if (value == newValue) {
+        if (value == newZoom) {
+            nextOrExit();
+        }
 
+        function exit() {
+            busy = false;
             clearInterval(timer);
         }
-    }
 
-    var timer = setInterval(zoomTo, 1000);
+        function refresh(data) {
+            oldZoom = newZoom;
+            newZoom = data.zoom;
+            latLngBounds = data.bound;
+            step = getStep();
+        }
+
+        function nextOrExit() {
+            var data = queue.shift();
+            if (data == null) {
+                exit();
+            } else {
+                refresh(data);
+            }
+        }
+    }
 }
+
 function initializeMap(zoom, position) {
     var mapOptions = {
         zoom: zoom,

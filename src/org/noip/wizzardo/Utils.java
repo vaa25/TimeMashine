@@ -51,5 +51,6 @@ public class Utils {
     public static void main(String[] args) {
         Text text = new Text(loadText("acts1.txt"));
         System.out.println(text.getIndexed());
+        System.out.println(text.search("Акелдама"));
     }
 }

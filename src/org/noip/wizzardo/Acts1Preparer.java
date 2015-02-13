@@ -23,6 +23,7 @@ public class Acts1Preparer {
         places = new ArrayList<>();
         addPlace("Масличная гора", "ru");
         addPlace("Город Давида", "ru");
+        addPlace("Акелдама / Akeldama", "ru");
 
         return places;
     }
@@ -37,18 +38,18 @@ public class Acts1Preparer {
         meta.setAttribute("position", new Polygon(35, 32));
         text.setTag(meta);
 
-        Tag yerusalemTag = new Tag("place");
-        yerusalemTag.setAttribute("placeName", "Город Давида");
-        yerusalemTag.setAttribute("visualName", "Иерусалим");
-        text.setTag(yerusalemTag, 216);
-
-        Tag eleonTag = new Tag("place");
-        eleonTag.setAttribute("placeName", "Масличная гора");
-        eleonTag.setAttribute("visualName", "Елеон\n(Масличная гора)");
-        text.setTag(eleonTag, 220);
+        text.setTag(getPlaceTag("Город Давида", "Иерусалим"), 216);
+        text.setTag(getPlaceTag("Масличная гора", "Елеон (Масличная гора)"), 220);
+        text.setTag(getPlaceTag("Акелдама / Akeldama", "Акелдама"), 356);
         return text.toString();
     }
 
+    private Tag getPlaceTag(String placeName, String visualName) {
+        Tag result = new Tag("place");
+        result.setAttribute("placeName", placeName);
+        result.setAttribute("visualName", visualName);
+        return result;
+    }
     private List<Place> addPlace(Place place) {
         if (!placeDAO.hasPlace(place.getTitle())) {
             placeDAO.create(place);
