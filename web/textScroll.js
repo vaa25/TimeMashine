@@ -1,4 +1,6 @@
 function move() {
+    var canvas = document.getElementById('text-canvas');
+    window.clientHeight = window.innerHeight;
     var offset = window.innerHeight;
     var text = document.getElementById('text');
 
@@ -47,6 +49,7 @@ function move() {
             if (tag != null) {
                 if (tag.tagName == 'PLACE') {
                     tag.setAttribute('style', 'background:grey');
+                    tag.setAttribute('onmouseover', 'console.log(this.id)');
                     var place = getPlace(tag.getAttribute('placename'));
                     place.title = tag.getAttribute('visualname');
                     place = new Place(place);

@@ -20,4 +20,5 @@ html, body {
     padding: 0;
     float: right;
     font-size: 200%;
+    overflow: hidden;
 }
