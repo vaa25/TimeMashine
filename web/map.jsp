@@ -20,7 +20,7 @@
     <script src="place.js"></script>
     <script src="textScroll.js"></script>
     <script>
-        google.maps.event.addDomListener(window, 'load', setPlaces(${places}));
+        google.maps.event.addDomListener(window, 'load', setPlaceSources(${places}));
         window.onload = move();
     </script>
 </head>

@@ -1,6 +1,4 @@
 function move() {
-    var canvas = document.getElementById('text-canvas');
-    window.clientHeight = window.innerHeight;
     var offset = window.innerHeight;
     var text = document.getElementById('text');
 
@@ -49,16 +47,22 @@ function move() {
             if (tag != null) {
                 if (tag.tagName == 'PLACE') {
                     tag.setAttribute('style', 'background:grey');
-                    tag.setAttribute('onmouseover', 'console.log(this.id)');
-                    var place = getPlace(tag.getAttribute('placename'));
-                    place.title = tag.getAttribute('visualname');
-                    place = new Place(place);
+                    tag.setAttribute('onmouseover', 'markBound(this)');
+                    tag.setAttribute('onmouseout', 'unmarkBound(this)');
+                    var placeSource = getPlaceSource(tag.getAttribute('placename'));
+                    placeSource.title = tag.getAttribute('visualname');
+                    var place = new Place(placeSource);
+                    places.addPlace(place);
                     place.draw();
                     place.show();
                 }
             }
         }
     }
-
-
+}
+function markBound(placeTag) {
+    places.getPlace(placeTag.getAttribute('visualname')).mark();
+}
+function unmarkBound(placeTag) {
+    places.getPlace(placeTag.getAttribute('visualname')).unmark();
 }

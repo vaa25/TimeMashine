@@ -3,8 +3,23 @@
  */
 
 var map;
+var placeSources;
 var places;
 
+function Places() {
+    this.places = [];
+    this.addPlace = function (place) {
+        this.places.push(place);
+    };
+    this.getPlace = function (name) {
+        console.log(this.places);
+        for (var index in this.places) {
+            if (this.places.hasOwnProperty(index) && this.places[index].title == name) {
+                return this.places[index];
+            }
+        }
+    }
+}
 function initializeMap(zoom, position) {
     var mapOptions = {
         zoom: zoom,
@@ -12,16 +27,17 @@ function initializeMap(zoom, position) {
         mapTypeId: google.maps.MapTypeId.SATELLITE
     };
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    places = new Places();
 }
 
-function setPlaces(source) {
-    places = source;
+function setPlaceSources(source) {
+    placeSources = source;
 }
 
-function getPlace(name) {
-    for (var index in places) {
-        if (places.hasOwnProperty(index) && places[index].title == name) {
-            return places[index];
+function getPlaceSource(name) {
+    for (var index in placeSources) {
+        if (placeSources.hasOwnProperty(index) && placeSources[index].title == name) {
+            return placeSources[index];
         }
     }
 }

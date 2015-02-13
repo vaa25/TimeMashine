@@ -5,26 +5,38 @@ function Place(place) {
     this.title = place.title;
     this.bound = getLatLons(place.bound);
     this.center = getLatLng(place.center);
-    this.latLngBound = getLatLngBound(this);
+    this.latLngBound = createLatLngBound(this);
+    this.polygon = createPolygon(this.bound);
+
+    this.mark = function () {
+        this.polygon.setOptions({fillOpacity: 0.35});
+    };
+
+    this.unmark = function () {
+        this.polygon.setOptions({fillOpacity: 0.1});
+    };
+
     this.draw = function () {
         drawMarker(this);
-        drawBound(this.bound);
+        drawBound(this);
     };
     this.show = function () {
-        console.log(this.latLngBound);
         map.panToBounds(this.latLngBound);
     };
 
-    function drawBound(bound) {
+    function createPolygon(bound) {
         return new google.maps.Polygon({
             path: bound,
             strokeColor: "#FF0000",
             strokeOpacity: 0.8,
             strokeWeight: 2,
             fillColor: "#FF0000",
-            fillOpacity: 0.35,
-            map: map
+            fillOpacity: 0.10
         });
+    }
+
+    function drawBound(me) {
+        me.polygon.setOptions({map: map});
     }
 
     function drawMarker(me) {
@@ -46,7 +58,7 @@ function Place(place) {
         });
     }
 
-    function getLatLngBound(me) {
+    function createLatLngBound(me) {
         var latLngBound = new google.maps.LatLngBounds(me.center, me.center);
         var count = 0;
         for (var index in me.bound) {
