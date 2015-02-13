@@ -17,14 +17,34 @@ import java.util.List;
 public class Acts1Preparer {
     private List<Place> places;
     private PlaceDAO placeDAO;
+    private String[][] data;
+
+    public static void main(String[] args) {
+        Text text = new Text(Utils.loadText("acts1.txt"));
+        System.out.println(text.getIndexed());
+        System.out.println(text.search("Иудее"));
+        System.out.println(text.search("Самарии"));
+        System.out.println(text.search("Елеон"));
+        System.out.println(text.search("Акелдама"));
+        System.out.println(text.search("Иерусалим"));
+        System.out.println(text.search("Иерусалиму"));
+        System.out.println(text.search("Иерусалиме"));
+        System.out.println(text.search("Иерусалима"));
+    }
 
     public List<Place> getPlaces() {
         placeDAO = new PlaceDAO(new DataBase().getStatement());
         places = new ArrayList<>();
-        addPlace("Масличная гора", "ru");
-        addPlace("Город Давида", "ru");
-        addPlace("Акелдама / Akeldama", "ru");
-
+        data = new String[][]{{"Город Давида", "ru", "Иерусалим"},
+                {"Масличная гора", "ru", "Елеон (Масличная гора)"},
+                {"Samaria", "en", "Самария"},
+                {"Акелдама / Akeldama", "ru", "Акелдама"},
+                {"Округ Иудея", "ru", "Иудея"}
+        };
+        for (String[] strings : data) {
+            System.out.println(strings[0]);
+            addPlace(strings[0], strings[1]);
+        }
         return places;
     }
 
@@ -38,10 +58,21 @@ public class Acts1Preparer {
         meta.setAttribute("position", new Polygon(35, 32));
         text.setTag(meta);
 
-        text.setTag(getPlaceTag("Город Давида", "Иерусалим"), 216);
-        text.setTag(getPlaceTag("Масличная гора", "Елеон (Масличная гора)"), 220);
-        text.setTag(getPlaceTag("Акелдама / Akeldama", "Акелдама"), 356);
+        setTag(text, 0, 64);
+        setTag(text, 0, 216);
+        setTag(text, 0, 224);
+        setTag(text, 0, 139);
+        setTag(text, 0, 346);
+        setTag(text, 1, 220);
+        setTag(text, 2, 145);
+        setTag(text, 3, 356);
+        setTag(text, 4, 143);
+
         return text.toString();
+    }
+
+    private void setTag(Text text, int index, int id) {
+        text.setTag(getPlaceTag(data[index][0], data[index][2]), id);
     }
 
     private Tag getPlaceTag(String placeName, String visualName) {
@@ -50,6 +81,7 @@ public class Acts1Preparer {
         result.setAttribute("visualName", visualName);
         return result;
     }
+
     private List<Place> addPlace(Place place) {
         if (!placeDAO.hasPlace(place.getTitle())) {
             placeDAO.create(place);

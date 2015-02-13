@@ -21,7 +21,7 @@ function Place(place) {
         drawBound(this);
     };
     this.show = function () {
-        smoothPanToBounds(15, this.latLngBound);
+        smoothPanToBounds(this.latLngBound);
     };
 
     function createPolygon(bound) {

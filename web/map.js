@@ -4,8 +4,8 @@
 var map;
 var queue = [];
 var busy = false;
-function smoothPanToBounds(newZoom, latLngBounds) {
-
+function smoothPanToBounds(latLngBounds) {
+    var newZoom = getZoom();
     if (busy) {
         queue.push({
             zoom: newZoom,
@@ -20,6 +20,15 @@ function smoothPanToBounds(newZoom, latLngBounds) {
     busy = true;
     var timer = setInterval(zoomTo, 300);
 
+    function getZoom() {
+        var width = latLngBounds.getNorthEast().lat() - latLngBounds.getSouthWest().lat();
+        var height = latLngBounds.getNorthEast().lng() - latLngBounds.getSouthWest().lng();
+        log(width);
+        log(height);
+        var res = Math.round(14 - Math.log(Math.max(width, height) / 0.025) / Math.log(2));
+        log(res);
+        return res;
+    }
     function getStep() {
         if (oldZoom < newZoom)return 1;
         if (oldZoom > newZoom)return -1;
@@ -41,8 +50,8 @@ function smoothPanToBounds(newZoom, latLngBounds) {
 
         function refresh(data) {
             oldZoom = newZoom;
-            newZoom = data.zoom;
             latLngBounds = data.bound;
+            newZoom = getZoom();
             step = getStep();
         }
 

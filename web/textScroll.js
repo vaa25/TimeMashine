@@ -16,7 +16,7 @@ function move() {
     setMouseControl();
     initializeMap(startZoom, startPosition);
     initializePlaces();
-    var timer = setInterval(frame, 10);
+    var timer = setInterval(frame, 100);
 
     function setMouseControl() {
         text.onmouseover = function () {
@@ -51,11 +51,13 @@ function move() {
                     tag.setAttribute('onmouseover', 'markBound(this)');
                     tag.setAttribute('onmouseout', 'unmarkBound(this)');
                     var placeSource = getPlaceSource(tag.getAttribute('placename'));
-                    placeSource.title = tag.getAttribute('visualname');
-                    var place = new Place(placeSource);
-                    places.addPlace(place);
-                    place.draw();
-                    place.show();
+                    if (placeSource != null) {
+                        placeSource.title = tag.getAttribute('visualname');
+                        var place = new Place(placeSource);
+                        places.addPlace(place);
+                        place.draw();
+                        place.show();
+                    }
                 }
             }
         }

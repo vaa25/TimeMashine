@@ -14,10 +14,10 @@ import java.io.IOException;
 public class TimeMashineServlet extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Gson gson = new Gson();
+//        Preparer preparer = new Preparer();
         Acts1Preparer preparer = new Acts1Preparer();
         req.setAttribute("places", gson.toJson(preparer.getPlaces()));
         req.setAttribute("text", preparer.getText());
-//        req.setAttribute("text", gson.toJson("от которого "));
         System.out.println(req.getAttribute("text"));
         getServletContext().getRequestDispatcher("/map.jsp").forward(req, resp);
     }

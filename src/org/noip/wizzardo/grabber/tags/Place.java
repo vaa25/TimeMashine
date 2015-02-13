@@ -3,6 +3,7 @@ package org.noip.wizzardo.grabber.tags;
 import org.noip.wizzardo.grabber.utils.GrabberUtil;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Б on 18.01.2015.
@@ -27,7 +28,7 @@ public class Place {
     private List<Photo> photos;
     private List<Comment> comments;
     private Location location;
-    private Language availableLanguages;
+    private Map<String, Language> availableLanguages;
 
     @Override
     public String toString() {
@@ -51,7 +52,7 @@ public class Place {
                 ", \nphotos=" + GrabberUtil.toString(photos) +
                 ", \ncomments=" + GrabberUtil.toString(comments) +
                 ", \nlocation=" + location +
-                ", \navailableLanguages=" + availableLanguages +
+//                ", \navailableLanguages=" + GrabberUtil.toString(availableLanguages)+
                 '}';
     }
 

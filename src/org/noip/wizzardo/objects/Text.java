@@ -53,13 +53,15 @@ public class Text {
 
     public String search(String word) {
         StringBuilder builder = new StringBuilder();
+        builder.append('"').append(word).append("\" ");
+        int empty = builder.length();
         for (int i = 0; i < words.length; i++) {
             if (word.equals(words[i])) {
                 builder.append(i).append(' ');
             }
         }
-        if (builder.length() == 0) {
-            builder.append('"').append(word).append("\" not found");
+        if (builder.length() == empty) {
+            builder.append("not found");
         }
         return builder.toString();
     }

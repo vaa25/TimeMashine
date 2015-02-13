@@ -1,6 +1,6 @@
 package org.noip.wizzardo.grabber;
 
-import org.noip.wizzardo.Preparer;
+import org.noip.wizzardo.Acts1Preparer;
 import org.noip.wizzardo.objects.Place;
 
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class Tester {
     public static void main(String[] args) {
-        List<Place> places = new Preparer().getPlaces();
+        List<Place> places = new Acts1Preparer().getPlaces();
         for (Place place : places) {
             System.out.println(place.getTitle());
         }
