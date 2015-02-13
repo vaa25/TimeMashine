@@ -29,17 +29,17 @@ function Place(place) {
 
     function drawMarker(me) {
         var marker = new google.maps.Marker;
-        var mapLabel = getMapLabel(me.title, me.center);
+        var mapLabel = getMapLabel(me);
         marker.bindTo('map', mapLabel);
         marker.bindTo('position', mapLabel);
         marker.setDraggable(false);
         return marker;
     }
 
-    function getMapLabel(title, center) {
+    function getMapLabel(me) {
         return new MapLabel({
-            text: title,
-            position: center,
+            text: me.title,
+            position: me.center,
             map: map,
             fontSize: 16,
             align: 'right'

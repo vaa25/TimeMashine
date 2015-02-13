@@ -13,14 +13,18 @@ function move() {
 
     var isPaused = false;
 
-    text.onmouseover = function () {
-        isPaused = true
-    };
-    text.onmouseout = function () {
-        isPaused = false
-    };
-
+    setMouseControl();
     initializeMap(startZoom, startPosition);
+    var timer = setInterval(frame, 10);
+
+    function setMouseControl() {
+        text.onmouseover = function () {
+            isPaused = true
+        };
+        text.onmouseout = function () {
+            isPaused = false
+        };
+    }
 
     function frame() {
         if (isPaused) {
@@ -42,8 +46,8 @@ function move() {
             var tag = document.getElementById(i.toString());
             if (tag != null) {
                 if (tag.tagName == 'PLACE') {
+                    tag.setAttribute('style', 'background:grey');
                     var place = getPlace(tag.getAttribute('placename'));
-                    console.log(place);
                     place.title = tag.getAttribute('visualname');
                     place = new Place(place);
                     place.draw();
@@ -53,6 +57,5 @@ function move() {
         }
     }
 
-    var timer = setInterval(frame, 10);
 
 }

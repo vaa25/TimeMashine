@@ -1,5 +1,7 @@
 package org.noip.wizzardo;
 
+import org.noip.wizzardo.objects.Text;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,5 +46,10 @@ public class Utils {
         while ((line = reader.readLine()) != null) {
             lines.add(line);
         }
+    }
+
+    public static void main(String[] args) {
+        Text text = new Text(loadText("acts1.txt"));
+        System.out.println(text.getIndexed());
     }
 }
