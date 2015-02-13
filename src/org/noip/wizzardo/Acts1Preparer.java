@@ -33,7 +33,7 @@ public class Acts1Preparer {
         Tag meta = new Tag("meta");
         meta.setAttribute("id", "meta");
         meta.setAttribute("size", String.valueOf(text.size()));
-        meta.setAttribute("zoom", String.valueOf(15));
+        meta.setAttribute("zoom", String.valueOf(9));
         meta.setAttribute("position", new Polygon(35, 32));
         text.setTag(meta);
 

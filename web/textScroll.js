@@ -15,6 +15,7 @@ function move() {
 
     setMouseControl();
     initializeMap(startZoom, startPosition);
+    initializePlaces();
     var timer = setInterval(frame, 10);
 
     function setMouseControl() {

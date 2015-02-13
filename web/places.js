@@ -12,7 +12,6 @@ function Places() {
         this.places.push(place);
     };
     this.getPlace = function (name) {
-        console.log(this.places);
         for (var index in this.places) {
             if (this.places.hasOwnProperty(index) && this.places[index].title == name) {
                 return this.places[index];
@@ -20,13 +19,7 @@ function Places() {
         }
     }
 }
-function initializeMap(zoom, position) {
-    var mapOptions = {
-        zoom: zoom,
-        center: getLatLng(position),
-        mapTypeId: google.maps.MapTypeId.SATELLITE
-    };
-    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+function initializePlaces() {
     places = new Places();
 }
 

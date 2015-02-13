@@ -21,7 +21,7 @@ function Place(place) {
         drawBound(this);
     };
     this.show = function () {
-        map.panToBounds(this.latLngBound);
+        smoothPanToBounds(15, this.latLngBound);
     };
 
     function createPolygon(bound) {
@@ -60,11 +60,9 @@ function Place(place) {
 
     function createLatLngBound(me) {
         var latLngBound = new google.maps.LatLngBounds(me.center, me.center);
-        var count = 0;
         for (var index in me.bound) {
             if (me.bound.hasOwnProperty(index)) {
                 latLngBound.extend(me.bound[index]);
-                console.log(count++);
             }
         }
         return latLngBound;

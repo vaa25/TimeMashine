@@ -18,6 +18,7 @@
     <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/maplabel/src/maplabel-compiled.js"></script>
     <script src="places.js"></script>
     <script src="place.js"></script>
+    <script src="map.js"></script>
     <script src="textScroll.js"></script>
     <script>
         google.maps.event.addDomListener(window, 'load', setPlaceSources(${places}));
