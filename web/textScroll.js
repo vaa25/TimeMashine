@@ -1,19 +1,20 @@
 function move() {
     var offset = window.innerHeight;
     var text = document.getElementById('text');
-
+    text.style.marginTop = offset + 'px';
+    text.hidden = false;
     var passed = 0;
     var prevCurrentWord = 0;
     var currentWord = 0;
-
     var meta = document.getElementById('meta');
+
     var size = meta.getAttribute('size');
     var startZoom = JSON.parse(meta.getAttribute('zoom'));
     var startPosition = JSON.parse(meta.getAttribute('position'));
-
     var isPaused = false;
 
     setMouseControl();
+
     initializeMap(startZoom, startPosition);
     initializePlaces();
     var timer = setInterval(frame, 100);
@@ -58,6 +59,7 @@ function move() {
                         place.draw();
                         place.show();
                     }
+
                 }
             }
         }

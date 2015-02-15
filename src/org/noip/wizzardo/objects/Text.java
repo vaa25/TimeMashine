@@ -38,6 +38,11 @@ public class Text {
         words[index] = tag.insert(words[index]);
     }
 
+    public void setEmptyTag(Tag tag, int index) {
+        tag.setAttribute("id", String.valueOf(index));
+        words[index] = tag.insertBefore(words[index]);
+    }
+
     public void setTag(Tag tag, int indexStart, int indexFinish) {
         words[indexStart] = tag.insertOpen(words[indexStart]);
         words[indexFinish] = tag.insertClose(words[indexFinish]);

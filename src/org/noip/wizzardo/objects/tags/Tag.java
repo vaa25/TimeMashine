@@ -21,6 +21,10 @@ public class Tag {
         return openTag() + string + closeTag();
     }
 
+    public String insertBefore(String string) {
+        return openTag() + closeTag() + string;
+    }
+
     public String insertOpen(String string) {
         return openTag() + string;
     }

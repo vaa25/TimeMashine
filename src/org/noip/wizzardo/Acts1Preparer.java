@@ -20,6 +20,7 @@ public class Acts1Preparer {
     private String[][] data;
 
     public static void main(String[] args) {
+
         Text text = new Text(Utils.loadText("acts1.txt"));
         System.out.println(text.getIndexed());
         System.out.println(text.search("Иудее"));
@@ -41,45 +42,19 @@ public class Acts1Preparer {
                 {"Акелдама / Akeldama", "ru", "Акелдама"},
                 {"Округ Иудея", "ru", "Иудея"}
         };
+        addPlaces();
+        return places;
+    }
+
+    private void addPlaces() {
         for (String[] strings : data) {
             System.out.println(strings[0]);
             addPlace(strings[0], strings[1]);
         }
-        return places;
     }
 
     public String getText() {
-        Text text = new Text(Utils.loadText("acts1.txt"));
-
-        Tag meta = new Tag("meta");
-        meta.setAttribute("id", "meta");
-        meta.setAttribute("size", String.valueOf(text.size()));
-        meta.setAttribute("zoom", String.valueOf(9));
-        meta.setAttribute("position", new Polygon(35, 32));
-        text.setTag(meta);
-
-        setTag(text, 0, 64);
-        setTag(text, 0, 216);
-        setTag(text, 0, 224);
-        setTag(text, 0, 139);
-        setTag(text, 0, 346);
-        setTag(text, 1, 220);
-        setTag(text, 2, 145);
-        setTag(text, 3, 356);
-        setTag(text, 4, 143);
-
-        return text.toString();
-    }
-
-    private void setTag(Text text, int index, int id) {
-        text.setTag(getPlaceTag(data[index][0], data[index][2]), id);
-    }
-
-    private Tag getPlaceTag(String placeName, String visualName) {
-        Tag result = new Tag("place");
-        result.setAttribute("placeName", placeName);
-        result.setAttribute("visualName", visualName);
-        return result;
+        return new TextProcessor().getText();
     }
 
     private List<Place> addPlace(Place place) {
@@ -102,5 +77,41 @@ public class Acts1Preparer {
             places.add(place);
         }
         return places;
+    }
+
+    private class TextProcessor {
+        private Text text;
+
+        public String getText() {
+            text = new Text(Utils.loadText("acts1.txt"));
+            setMetaTag();
+            setPlaceTag(0, 64, "center");
+            setPlaceTag(0, 139, "addBound");
+            setPlaceTag(4, 143, "addBound");
+            setPlaceTag(2, 145, "addBound");
+            setPlaceTag(0, 216, "center");
+            setPlaceTag(1, 220, "addBound");
+            setPlaceTag(0, 224, "addBound");
+            setPlaceTag(0, 346, "center");
+            setPlaceTag(3, 356, "addBound");
+            return text.toString();
+        }
+
+        private void setMetaTag() {
+            Tag meta = new Tag("meta");
+            meta.setAttribute("id", "meta");
+            meta.setAttribute("size", String.valueOf(text.size()));
+            meta.setAttribute("zoom", String.valueOf(9));
+            meta.setAttribute("position", new Polygon(35, 32));
+            text.setTag(meta);
+        }
+
+        private void setPlaceTag(int dataIndex, int id, String panTo) {
+            Tag result = new Tag("place");
+            result.setAttribute("placeName", data[dataIndex][0]);
+            result.setAttribute("visualName", data[dataIndex][2]);
+            result.setAttribute("panTo", panTo);
+            text.setTag((result), id);
+        }
     }
 }
