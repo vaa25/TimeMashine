@@ -7,7 +7,6 @@ function Place(placeSource) {
     this.center = getLatLng(placeSource.center);
     this.latLngBounds = createLatLngBound(this);
     this.polygon = createPolygon(this.latLons);
-
     this.mark = function () {
         this.polygon.setOptions({fillOpacity: 0.35});
     };
@@ -21,6 +20,7 @@ function Place(placeSource) {
         drawBound(this);
     };
 
+    this.draw();
 
     function createPolygon(bound) {
         return new google.maps.Polygon({

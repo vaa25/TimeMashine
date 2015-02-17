@@ -1,5 +1,6 @@
 function move() {
     viewport = new Viewport();
+    mapNavigator = new MapNavigator();
     var offset = window.innerHeight;
     var text = document.getElementById('text');
     text.style.marginTop = offset + 'px';
@@ -7,25 +8,21 @@ function move() {
     var passed = 0;
     var prevCurrentWord = 0;
     var currentWord = 0;
-    var meta = document.getElementById('meta');
-    var size = meta.getAttribute('size');
-    var startZoom = JSON.parse(meta.getAttribute('zoom'));
-    var startPosition = JSON.parse(meta.getAttribute('position'));
     var isPaused = false;
 
     setMouseControl();
 
-    initializeMap(startZoom, startPosition);
+    initializeMap(JSON.parse($('#meta').attr('zoom')), JSON.parse($('#meta').attr('position')));
     initializePlaces();
     var timer = setInterval(frame, 10);
 
     function setMouseControl() {
-        text.onmouseover = function () {
+        $(text).mouseover(function () {
             isPaused = true
-        };
-        text.onmouseout = function () {
+        });
+        $(text).mouseout = (function () {
             isPaused = false
-        };
+        });
     }
 
     function frame() {
@@ -34,8 +31,8 @@ function move() {
         }
         passed++;
         offset--;
-        text.style.marginTop = offset + 'px';
-        currentWord = passed / text.clientHeight * size;
+        $(text).css('marginTop', offset + 'px');
+        currentWord = passed / text.clientHeight * $('#meta').attr('size');
         activateTags();
         prevCurrentWord = currentWord;
         if (offset == -text.clientHeight) {
@@ -44,34 +41,34 @@ function move() {
     }
 
     function activateTags() {
+        function activateNewPlace() {
+            var placeSource = getPlaceSource(tag.attr('placename'));
+            placeSource.title = tag.attr('visualname');
+            place = new Place(placeSource);
+            places.addPlace(place);
+        }
+
+        function setTagControl() {
+            tag.css('background', 'grey');
+            tag.mouseover(function () {
+                places.getPlace($(this).attr('visualname')).mark();
+            });
+            tag.mouseout(function () {
+                places.getPlace($(this).attr('visualname')).unmark();
+            });
+        }
+
         for (var i = Math.round(prevCurrentWord); i < Math.round(currentWord); i++) {
-            var tag = document.getElementById(i.toString());
-            if (tag != null) {
-                if (tag.tagName == 'PLACE') {
-                    tag.setAttribute('style', 'background:grey');
-                    tag.setAttribute('onmouseover', 'markBound(this)');
-                    tag.setAttribute('onmouseout', 'unmarkBound(this)');
-                    var place = places.getPlace(tag.getAttribute('visualname'));
-                    if (place == undefined) {
-                        var placeSource = getPlaceSource(tag.getAttribute('placename'));
-                        placeSource.title = tag.getAttribute('visualname');
-                        place = new Place(placeSource);
-                        places.addPlace(place);
-                        place.draw();
-                    }
-                    console.log(place);
-                    viewport.add(place.latLngBounds, tag.getAttribute('panto'));
-                    console.log(viewport);
-                    console.log(tag.getAttribute('panto'));
-                    smoothPanToBounds();
+            var tag = $('PLACE#' + i.toString());
+            if (tag.length != 0) {
+                setTagControl();
+                var place = places.getPlace(tag.attr('visualname'));
+                if (place == undefined) {
+                    activateNewPlace();
                 }
+                viewport.add(place.latLngBounds, tag.attr('panto'));
+                mapNavigator.smoothPanToBounds();
             }
         }
     }
-}
-function markBound(placeTag) {
-    places.getPlace(placeTag.getAttribute('visualname')).mark();
-}
-function unmarkBound(placeTag) {
-    places.getPlace(placeTag.getAttribute('visualname')).unmark();
 }

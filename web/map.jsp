@@ -16,7 +16,7 @@
     <LINK rel=stylesheet type="text/css" href=map.css>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
     <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/maplabel/src/maplabel-compiled.js"></script>
-    <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>--%>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="places.js"></script>
     <script src="place.js"></script>
     <script src="map.js"></script>
