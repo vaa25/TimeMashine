@@ -1,12 +1,12 @@
 /**
  * Created by vaa25 on 12.02.2015.
  */
-function Place(place) {
-    this.title = place.title;
-    this.bound = getLatLons(place.bound);
-    this.center = getLatLng(place.center);
-    this.latLngBound = createLatLngBound(this);
-    this.polygon = createPolygon(this.bound);
+function Place(placeSource) {
+    this.title = placeSource.title;
+    this.latLons = getLatLons(placeSource.bound);
+    this.center = getLatLng(placeSource.center);
+    this.latLngBounds = createLatLngBound(this);
+    this.polygon = createPolygon(this.latLons);
 
     this.mark = function () {
         this.polygon.setOptions({fillOpacity: 0.35});
@@ -20,9 +20,7 @@ function Place(place) {
         drawMarker(this);
         drawBound(this);
     };
-    this.show = function () {
-        smoothPanToBounds(this.latLngBound);
-    };
+
 
     function createPolygon(bound) {
         return new google.maps.Polygon({
@@ -60,9 +58,9 @@ function Place(place) {
 
     function createLatLngBound(me) {
         var latLngBound = new google.maps.LatLngBounds(me.center, me.center);
-        for (var index in me.bound) {
-            if (me.bound.hasOwnProperty(index)) {
-                latLngBound.extend(me.bound[index]);
+        for (var index in me.latLons) {
+            if (me.latLons.hasOwnProperty(index)) {
+                latLngBound.extend(me.latLons[index]);
             }
         }
         return latLngBound;

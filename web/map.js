@@ -4,42 +4,35 @@
 var map;
 var queue = [];
 var busy = false;
-function smoothPanToBounds(latLngBounds) {
-    var newZoom = getZoom();
+function smoothPanToBounds() {
+    var newElement = new Viewport();
+    newElement.add(viewport.getLatLngBounds(), 'center');
+    queue.push(newElement);
     if (busy) {
-        queue.push({
-            zoom: newZoom,
-            bound: latLngBounds
-        });
         return;
     }
-
+    var currentViewport = queue.shift();
+    console.log(currentViewport);
+    var newZoom = currentViewport.getPreferZoom();
     var oldZoom = map.getZoom();
-    var step = getStep();
-    var value = oldZoom;
+    var zoomStep = getZoomStep();
+    var currentZoom = oldZoom;
     busy = true;
     var timer = setInterval(zoomTo, 300);
 
-    function getZoom() {
-        var width = latLngBounds.getNorthEast().lat() - latLngBounds.getSouthWest().lat();
-        var height = latLngBounds.getNorthEast().lng() - latLngBounds.getSouthWest().lng();
-        log(width);
-        log(height);
-        var res = Math.round(14 - Math.log(Math.max(width, height) / 0.025) / Math.log(2));
-        log(res);
-        return res;
-    }
-    function getStep() {
+
+    function getZoomStep() {
         if (oldZoom < newZoom)return 1;
         if (oldZoom > newZoom)return -1;
         return 0;
     }
 
     function zoomTo() {
-        value += step;
-        map.setZoom(value);
-        map.panToBounds(latLngBounds);
-        if (value == newZoom) {
+        currentZoom += zoomStep;
+        map.setZoom(currentZoom);
+        //map.panToBounds(currentViewport.getLatLngBounds());
+        map.panTo(currentViewport.getCenter());
+        if (currentZoom == newZoom) {
             nextOrExit();
         }
 
@@ -48,19 +41,18 @@ function smoothPanToBounds(latLngBounds) {
             clearInterval(timer);
         }
 
-        function refresh(data) {
+        function refresh() {
             oldZoom = newZoom;
-            latLngBounds = data.bound;
-            newZoom = getZoom();
-            step = getStep();
+            newZoom = currentViewport.getPreferZoom();
+            zoomStep = getZoomStep();
         }
 
         function nextOrExit() {
-            var data = queue.shift();
-            if (data == null) {
+            currentViewport = queue.shift();
+            if (currentViewport == undefined) {
                 exit();
             } else {
-                refresh(data);
+                refresh();
             }
         }
     }

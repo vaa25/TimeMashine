@@ -1,4 +1,5 @@
 function move() {
+    viewport = new Viewport();
     var offset = window.innerHeight;
     var text = document.getElementById('text');
     text.style.marginTop = offset + 'px';
@@ -7,7 +8,6 @@ function move() {
     var prevCurrentWord = 0;
     var currentWord = 0;
     var meta = document.getElementById('meta');
-
     var size = meta.getAttribute('size');
     var startZoom = JSON.parse(meta.getAttribute('zoom'));
     var startPosition = JSON.parse(meta.getAttribute('position'));
@@ -17,7 +17,7 @@ function move() {
 
     initializeMap(startZoom, startPosition);
     initializePlaces();
-    var timer = setInterval(frame, 100);
+    var timer = setInterval(frame, 10);
 
     function setMouseControl() {
         text.onmouseover = function () {
@@ -51,15 +51,19 @@ function move() {
                     tag.setAttribute('style', 'background:grey');
                     tag.setAttribute('onmouseover', 'markBound(this)');
                     tag.setAttribute('onmouseout', 'unmarkBound(this)');
-                    var placeSource = getPlaceSource(tag.getAttribute('placename'));
-                    if (placeSource != null) {
+                    var place = places.getPlace(tag.getAttribute('visualname'));
+                    if (place == undefined) {
+                        var placeSource = getPlaceSource(tag.getAttribute('placename'));
                         placeSource.title = tag.getAttribute('visualname');
-                        var place = new Place(placeSource);
+                        place = new Place(placeSource);
                         places.addPlace(place);
                         place.draw();
-                        place.show();
                     }
-
+                    console.log(place);
+                    viewport.add(place.latLngBounds, tag.getAttribute('panto'));
+                    console.log(viewport);
+                    console.log(tag.getAttribute('panto'));
+                    smoothPanToBounds();
                 }
             }
         }
