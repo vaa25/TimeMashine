@@ -20,7 +20,7 @@ function move() {
         $(text).mouseover(function () {
             isPaused = true
         });
-        $(text).mouseout = (function () {
+        $(text).mouseout(function () {
             isPaused = false
         });
     }
