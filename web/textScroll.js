@@ -2,8 +2,11 @@ function move() {
     viewport = new Viewport();
     mapNavigator = new MapNavigator();
     var offset = window.innerHeight;
+    //var text = $('#text');
     var text = document.getElementById('text');
+    //$(text).css('marginTop',offset + 'px');
     text.style.marginTop = offset + 'px';
+    //$(text).css('hidden','false');
     text.hidden = false;
     var passed = 0;
     var prevCurrentWord = 0;
@@ -49,11 +52,12 @@ function move() {
         }
 
         function setTagControl() {
-            tag.css('background', 'grey');
-            tag.mouseover(function () {
+            tag.css('background', 'silver');
+            tag.hover(function () {
+                $(this).css('background-color', 'grey');
                 places.getPlace($(this).attr('visualname')).mark();
-            });
-            tag.mouseout(function () {
+            }, function () {
+                $(this).css('background-color', 'silver');
                 places.getPlace($(this).attr('visualname')).unmark();
             });
         }
