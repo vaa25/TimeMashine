@@ -22,3 +22,11 @@ html, body {
     font-size: 200%;
     overflow: hidden;
 }
+
+.backgroundHighlight {
+    background-color: silver;
+}
+
+.backgroundHighlightSelected {
+    background-color: grey;
+}

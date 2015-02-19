@@ -52,12 +52,12 @@ function move() {
         }
 
         function setTagControl() {
-            tag.css('background', 'silver');
+            tag.addClass('backgroundHighlight');
             tag.hover(function () {
-                $(this).css('background-color', 'grey');
+                $(this).addClass('backgroundHighlightSelected');
                 places.getPlace($(this).attr('visualname')).mark();
             }, function () {
-                $(this).css('background-color', 'silver');
+                $(this).removeClass('backgroundHighlightSelected');
                 places.getPlace($(this).attr('visualname')).unmark();
             });
         }
