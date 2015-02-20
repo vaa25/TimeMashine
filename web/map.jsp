@@ -3,11 +3,18 @@
 <!DOCTYPE html>
 <html>
 <body>
-<div id="map-canvas"></div>
-<div id="text-canvas">
-    <div id="text" hidden>${text}</div>
-</div>
-
+<table>
+    <tr>
+        <td>
+            <div id="map-canvas"></div>
+        </td>
+        <td>
+            <div id="text-canvas">
+                <p id="text" hidden>${text}</p>
+            </div>
+        </td>
+    </tr>
+</table>
 </body>
 <head>
     <title>Машина времени</title>
