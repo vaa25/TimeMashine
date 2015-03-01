@@ -9,9 +9,25 @@
             <div id="map-canvas"></div>
         </td>
         <td>
-            <div id="text-canvas">
-                <p id="text" hidden>${text}</p>
-            </div>
+            <table id="text-canvas">
+                <tr id="control">
+                    <td>
+                        <div id="speedLess">меньше</div>
+                    </td>
+                    <td>
+                        <div> скорость</div>
+                    </td>
+                    <td>
+                        <div id="speedMore">больше</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+
+                        <div id="text" hidden>${text}</div>
+                    </td>
+                </tr>
+            </table>
         </td>
     </tr>
 </table>
