@@ -5,6 +5,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.noip.wizzardo.db.DataBase;
+import org.noip.wizzardo.db.dao.PolygonsDAO;
 import org.noip.wizzardo.grabber.tags.Polygon;
 
 public class PolygonsDAOTest extends TestCase {

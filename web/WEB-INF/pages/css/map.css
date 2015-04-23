@@ -1,0 +1,49 @@
+
+html, body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+.backgroundHighlight {
+    background-color: silver;
+}
+
+.backgroundHighlightSelected {
+    background-color: grey;
+}
+
+.content {
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+}
+
+.left, .right {
+    float: left;
+    width: 40%;
+    /*padding-bottom: 99in;*/
+    /*margin-bottom: -99in;*/
+}
+
+.left {
+    background-color: #ff0;
+}
+
+.top {
+    height: 1em;
+}
+
+.right {
+    height: 100%;
+}
+
+.bottom {
+    height: 100%;
+    overflow: hidden;
+}
+
+.wrap {
+    overflow: auto;
+    height: calc(100% - 1em);
+}

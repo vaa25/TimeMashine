@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.noip.wizzardo.coords.Babylon;
 import org.noip.wizzardo.db.DataBase;
+import org.noip.wizzardo.db.dao.PlaceDAO;
 import org.noip.wizzardo.objects.Place;
 
 public class PlaceDAOTest extends TestCase {

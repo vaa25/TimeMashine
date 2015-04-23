@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.noip.wizzardo.TestUtils;
 import org.noip.wizzardo.db.DataBase;
+import org.noip.wizzardo.db.dao.TextDAO;
 
 public class TextDAOTest extends TestCase {
     private int id;

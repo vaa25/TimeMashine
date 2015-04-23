@@ -1,12 +1,13 @@
 package org.noip.wizzardo;
 
 import org.noip.wizzardo.db.DataBase;
-import org.noip.wizzardo.db.tables.myObjects.PlaceDAO;
+import org.noip.wizzardo.db.dao.PlaceDAO;
 import org.noip.wizzardo.grabber.tags.Polygon;
 import org.noip.wizzardo.grabber.utils.GrabberUtil;
 import org.noip.wizzardo.objects.Place;
 import org.noip.wizzardo.objects.Text;
 import org.noip.wizzardo.objects.tags.Tag;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,8 @@ import java.util.List;
 /**
  * Created by Б on 21.01.2015.
  */
-public class Acts2Preparer {
+@Component
+public class Acts2Preparer implements Preparer {
     private List<Place> places;
     private PlaceDAO placeDAO;
     private String[][] data;

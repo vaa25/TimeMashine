@@ -1,6 +1,5 @@
-package org.noip.wizzardo.db.tables.myObjects;
+package org.noip.wizzardo.db.dao;
 
-import org.noip.wizzardo.db.tables.Table;
 import org.noip.wizzardo.grabber.tags.Polygon;
 import org.noip.wizzardo.objects.Place;
 
@@ -12,7 +11,7 @@ import java.util.List;
 /**
  * Created by Б on 31.01.2015.
  */
-public class PlaceDAO extends Table {
+public class PlaceDAO extends AbstractDAO {
     public PlaceDAO(Statement statement) {
         super(statement);
     }

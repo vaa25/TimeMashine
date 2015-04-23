@@ -1,13 +1,17 @@
 function move() {
+
     viewport = new Viewport();
     mapNavigator = new MapNavigator();
     var offset = window.innerHeight;
-    //var text = $('#text');
-    var text = document.getElementById('text');
-    //$(text).css('marginTop',offset + 'px');
-    text.style.marginTop = offset + 'px';
-    //$(text).css('hidden','false');
-    text.hidden = false;
+    console.log(offset);
+    var text = $('.wrap')[0];
+    console.log(text);
+    console.log($(text).position());
+    $(text).offset({top: 150, left: 100});
+    console.log(text);
+    console.log($(text).offset());
+    $(text).css('hidden', 'false');
+    console.log(text);
     var passed = 0;
     var prevCurrentWord = 0;
     var currentWord = 0;
@@ -34,11 +38,14 @@ function move() {
         }
         passed++;
         offset--;
-        $(text).css('marginTop', offset + 'px');
-        currentWord = passed / text.clientHeight * $('#meta').attr('size');
+        $(text).css('margin-top', offset + 'px');
+        //currentWord = passed / text.clientHeight * $('#meta').attr('size');
+        currentWord = passed / $(text).clientHeight * $('#meta').attr('size');
         activateTags();
         prevCurrentWord = currentWord;
-        if (offset == -text.clientHeight) {
+        //if (offset == -text.clientHeight) {
+        if (offset == -$(text).clientHeight) {
+            console.log(offset);
             clearInterval(timer);
         }
     }

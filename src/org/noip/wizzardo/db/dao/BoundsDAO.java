@@ -1,6 +1,5 @@
-package org.noip.wizzardo.db.tables.myObjects;
+package org.noip.wizzardo.db.dao;
 
-import org.noip.wizzardo.db.tables.Table;
 import org.noip.wizzardo.grabber.tags.Polygon;
 
 import java.sql.ResultSet;
@@ -12,7 +11,7 @@ import java.util.List;
 /**
  * Created by Б on 31.01.2015.
  */
-public class BoundsDAO extends Table {
+public class BoundsDAO extends AbstractDAO {
     public BoundsDAO(Statement statement) {
         super(statement);
         createTable();

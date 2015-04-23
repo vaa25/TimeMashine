@@ -5,6 +5,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.noip.wizzardo.db.DataBase;
+import org.noip.wizzardo.db.dao.BoundsDAO;
 import org.noip.wizzardo.grabber.tags.Polygon;
 
 import java.util.ArrayList;

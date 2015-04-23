@@ -62,13 +62,10 @@ function MapNavigator() {
 
 
 function initializeMap(zoom, position) {
-    console.log(position);
     var mapOptions = {
         zoom: zoom,
         center: getLatLng(position),
         mapTypeId: google.maps.MapTypeId.SATELLITE
     };
-    console.log(document.getElementById('map-canvas'));
-    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-    console.log(document.getElementById('map-canvas'));
+    map = new google.maps.Map(document.getElementsByClassName('left')[0], mapOptions);
 }
