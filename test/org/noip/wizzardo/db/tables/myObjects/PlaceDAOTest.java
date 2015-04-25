@@ -6,17 +6,17 @@ import org.junit.Before;
 import org.junit.Test;
 import org.noip.wizzardo.coords.Babylon;
 import org.noip.wizzardo.db.DataBase;
-import org.noip.wizzardo.db.dao.PlaceDAO;
+import org.noip.wizzardo.db.dao.PlaceJdbcDAO;
 import org.noip.wizzardo.objects.Place;
 
 public class PlaceDAOTest extends TestCase {
-    private PlaceDAO dao;
+    private PlaceJdbcDAO dao;
     private Place place;
 
     @Before
     public void setUp() throws Exception {
         //given
-        dao = new PlaceDAO(new DataBase().getStatement());
+        dao = new PlaceJdbcDAO(new DataBase().getStatement());
         place = new Babylon();
     }
 

@@ -1,7 +1,7 @@
 package org.noip.wizzardo;
 
 import org.noip.wizzardo.db.DataBase;
-import org.noip.wizzardo.db.dao.PlaceDAO;
+import org.noip.wizzardo.db.dao.PlaceJdbcDAO;
 import org.noip.wizzardo.grabber.tags.Polygon;
 import org.noip.wizzardo.grabber.utils.GrabberUtil;
 import org.noip.wizzardo.objects.Place;
@@ -18,7 +18,7 @@ import java.util.List;
 @Component
 public class Acts2Preparer implements Preparer {
     private List<Place> places;
-    private PlaceDAO placeDAO;
+    private PlaceJdbcDAO placeDAO;
     private String[][] data;
 
     public static void main(String[] args) {
@@ -46,7 +46,7 @@ public class Acts2Preparer implements Preparer {
     }
 
     public List<Place> getPlaces() {
-        placeDAO = new PlaceDAO(new DataBase().getStatement());
+        placeDAO = new PlaceJdbcDAO(new DataBase().getStatement());
         places = new ArrayList<>();
         data = new String[][]{{"Город Давида", "ru", "Иерусалим"}
                 , {"Округ Иудея", "ru", "Иудея"}

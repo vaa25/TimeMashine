@@ -1,12 +1,12 @@
 package org.noip.wizzardo;
 
-import org.noip.wizzardo.db.DataBase;
-import org.noip.wizzardo.db.dao.PlaceDAO;
+import org.noip.wizzardo.db.dao.PlaceDao;
 import org.noip.wizzardo.grabber.tags.Polygon;
 import org.noip.wizzardo.grabber.utils.GrabberUtil;
 import org.noip.wizzardo.objects.Place;
 import org.noip.wizzardo.objects.Text;
 import org.noip.wizzardo.objects.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -18,7 +18,8 @@ import java.util.List;
 @Component
 public class Acts1Preparer implements Preparer {
     private List<Place> places;
-    private PlaceDAO placeDAO;
+    @Autowired
+    private PlaceDao placeDao;
     private String[][] data;
 
     public Acts1Preparer() {
@@ -40,7 +41,7 @@ public class Acts1Preparer implements Preparer {
 
     @Override
     public List<Place> getPlaces() {
-        placeDAO = new PlaceDAO(new DataBase().getStatement());
+//        placeDao = new PlaceJdbcDAO(new DataBase().getStatement());
         places = new ArrayList<>();
         data = new String[][]{{"Город Давида", "ru", "Иерусалим"},
                 {"Масличная гора", "ru", "Елеон (Масличная гора)"},
@@ -65,8 +66,8 @@ public class Acts1Preparer implements Preparer {
     }
 
     private List<Place> addPlace(Place place) {
-        if (!placeDAO.hasPlace(place.getTitle())) {
-            placeDAO.create(place);
+        if (!placeDao.hasPlace(place.getTitle())) {
+            placeDao.create(place);
         }
         places.add(place);
         return places;
@@ -74,11 +75,11 @@ public class Acts1Preparer implements Preparer {
 
     private List<Place> addPlace(String title, String language) {
         Place place;
-        if (!placeDAO.hasPlace(title)) {
+        if (!placeDao.hasPlace(title)) {
             place = GrabberUtil.downloadPlace(title, language);
-            placeDAO.create(place);
+            placeDao.create(place);
         } else {
-            place = placeDAO.read(title);
+            place = placeDao.read(title);
         }
         if (place != null) {
             places.add(place);

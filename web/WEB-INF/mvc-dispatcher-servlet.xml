@@ -14,6 +14,49 @@
     <mvc:resources mapping="/css/**" location="/WEB-INF/pages/css/"/>
     <mvc:resources mapping="/javascript/**" location="/WEB-INF/pages/javascript/"/>
     <context:component-scan base-package="org.noip.wizzardo"/>
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+
+    <!--<bean id="jdbcDaoSupport"-->
+    <!--class="org.springframework.jdbc.core.support.JdbcDaoSupport"-->
+    <!--abstract="true">-->
+    <!--<property name="dataSource" ref="dataSource" />-->
+    <!--<property name="jdbcTemplate" ref="jdbcTemplate"/>-->
+    <!--</bean>-->
+
+    <bean id="polygonsSpringDao" class="org.noip.wizzardo.db.dao.PolygonsSpringDao">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    <bean id="boundsSpringDao" class="org.noip.wizzardo.db.dao.BoundsSpringDao">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    <bean id="placeSpringDao" class="org.noip.wizzardo.db.dao.PlaceSpringDao">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    <bean id="textSpringDao" class="org.noip.wizzardo.db.dao.TextSpringDao">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+
+    <!--<bean id="polygonsSpringDao" class="org.noip.wizzardo.db.dao.PolygonsSpringDao" parent="jdbcDaoSupport"/>-->
+    <!--<bean id="boundsSpringDao" class="org.noip.wizzardo.db.dao.BoundsSpringDao" parent="jdbcDaoSupport"/>-->
+    <!--<bean id="placeSpringDao" class="org.noip.wizzardo.db.dao.PlaceSpringDao" parent="jdbcDaoSupport"/>-->
+    <!--<bean id="textSpringDao" class="org.noip.wizzardo.db.dao.TextSpringDao" parent="jdbcDaoSupport"/>-->
+
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+          p:driverClassName="org.postgresql.Driver"
+          p:url="jdbc:postgresql://localhost:5432/hijack" p:username="hijack" p:password="1234"/>
+
+    <bean id="dataSourceWizzardo" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+          p:driverClassName="org.postgresql.Driver"
+          p:url="jdbc:postgresql://localhost:5432/postgres" p:username="postgres" p:password="1234"/>
+
     <bean
             class="org.springframework.web.servlet.view.InternalResourceViewResolver"
             p:prefix="/WEB-INF/pages/"

@@ -4,20 +4,21 @@ import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.noip.wizzardo.db.DataBase;
-import org.noip.wizzardo.db.dao.BoundsDAO;
+import org.noip.wizzardo.db.dao.BoundsDao;
+import org.noip.wizzardo.db.dao.BoundsSpringDao;
 import org.noip.wizzardo.grabber.tags.Polygon;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BoundsDAOTest extends TestCase {
+public class BoundsDaoTest extends TestCase {
     private final int id = 987654321;
-    private BoundsDAO dao;
+    private BoundsDao dao;
     private List<Polygon> bound;
     @Before
     public void setUp() throws Exception {
-        dao = new BoundsDAO(new DataBase().getStatement());
+//        dao = new BoundsJdbcDAO(new DataBase().getStatement());
+        dao = new BoundsSpringDao();
         bound = new ArrayList<>();
         bound.add(new Polygon(1, 2));
         bound.add(new Polygon(2, 3));

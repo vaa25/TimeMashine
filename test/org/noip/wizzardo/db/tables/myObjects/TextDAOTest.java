@@ -6,17 +6,17 @@ import org.junit.Before;
 import org.junit.Test;
 import org.noip.wizzardo.TestUtils;
 import org.noip.wizzardo.db.DataBase;
-import org.noip.wizzardo.db.dao.TextDAO;
+import org.noip.wizzardo.db.dao.TextJdbcDAO;
 
 public class TextDAOTest extends TestCase {
     private int id;
-    private TextDAO dao;
+    private TextJdbcDAO dao;
     private String text = TestUtils.loadText("text.txt");
 
     @Before
     public void setUp() throws Exception {
         //given
-        dao = new TextDAO(new DataBase().getStatement());
+        dao = new TextJdbcDAO(new DataBase().getStatement());
     }
 
     @After

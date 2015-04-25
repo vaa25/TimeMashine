@@ -4,18 +4,20 @@ import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.noip.wizzardo.db.DataBase;
-import org.noip.wizzardo.db.dao.PolygonsDAO;
+import org.noip.wizzardo.db.dao.PolygonsDao;
 import org.noip.wizzardo.grabber.tags.Polygon;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class PolygonsDAOTest extends TestCase {
     private int id;
-    private PolygonsDAO dao;
+    @Autowired
+    private PolygonsDao dao;
     private Polygon polygon;
     @Before
     public void setUp() throws Exception {
         //given
-        dao = new PolygonsDAO(new DataBase().getStatement());
+//        dao = new PolygonsJdbcDAO(new DataBase().getStatement());
+//        dao = new PolygonsSpringDao();
         polygon = new Polygon(1, 2);
     }
 
