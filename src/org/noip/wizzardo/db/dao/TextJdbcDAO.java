@@ -1,7 +1,5 @@
 package org.noip.wizzardo.db.dao;
 
-import org.springframework.stereotype.Component;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -9,7 +7,6 @@ import java.sql.Statement;
 /**
  * Created by Б on 30.01.2015.
  */
-@Component
 public class TextJdbcDAO extends AbstractDAO implements TextDao {
 
     public TextJdbcDAO(Statement statement) {

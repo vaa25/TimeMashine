@@ -1,9 +1,11 @@
 package org.noip.wizzardo.db.dao;
 
 import org.noip.wizzardo.grabber.tags.Polygon;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 /**
@@ -18,15 +20,17 @@ public class BoundsSpringDao extends JdbcDaoSupport implements BoundsDao {
     private String SELECT_BY_PLACEID = "SELECT x,y FROM polygons WHERE id IN (SELECT polygon_id FROM bounds WHERE place_id=?)";
     private String DELETE_POLYGONS = "DELETE FROM polygons WHERE id IN (SELECT polygon_id FROM bounds WHERE place_id=?)";
     private String DELETE_BOUNDS = "DELETE FROM bounds WHERE place_id=?";
+    @Autowired
+    private PolygonsDao polygonsDao;
 
-    public BoundsSpringDao() {
+    @PostConstruct
+    private void init() {
         getJdbcTemplate().execute(CREATE_TABLE_IF_NOT_EXISTS);
     }
 
     public void create(int idPlace, List<Polygon> bound) {
-        PolygonsSpringDao polygonsSpringDao = new PolygonsSpringDao();
         for (Polygon polygon : bound) {
-            int id = polygonsSpringDao.create(polygon);
+            int id = polygonsDao.create(polygon);
             getJdbcTemplate().update(INSERT, idPlace, id);
         }
     }
